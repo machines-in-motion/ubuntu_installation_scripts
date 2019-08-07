@@ -21,3 +21,9 @@ sudo ./setup_ubuntu update
 To see the list of software this script install (and how it install it), visit the related dockerfile (e.g. for 16.04 : in official/ubuntu_16_04).
 
 In the preempt folder you will also find scripts useful for patching your 16.04 kernel.
+
+Authors / Maintainers :
+
+Vincent Berenz
+Maximilien Naveau
+Julian Viereck
