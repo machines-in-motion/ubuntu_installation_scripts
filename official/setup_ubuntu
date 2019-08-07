@@ -1,0 +1,90 @@
+#! /bin/bash
+
+
+# check if root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+# getting ubuntu version
+ubuntu_version="$(lsb_release -rs)"
+
+echo "ubuntu version: $ubuntu_version"
+
+# we support only 14.04 and 16.04
+valid_ubuntu=0
+if [ "$ubuntu_version" = "14.04" ]; then
+    valid_ubuntu=1
+fi
+if [ "$ubuntu_version" = "16.04" ]; then
+    valid_ubuntu=1
+fi
+if [ $valid_ubuntu -eq 0 ]; then
+    echo "This script supports exclusively ubuntu 14.04 and 16.04"
+    exit
+fi
+
+
+# check if any argument passed
+if [ $# -eq 0 ]
+  then
+      echo "[ERROR] Pass install or update as argument"
+      exit
+fi
+
+# checking if "update" or "install" passed as argument
+install=0
+if [ "$1" = "update" ]; then
+    install=0
+elif [ "$1" = "install" ]; then
+    install=1
+else
+    echo "[ERROR] Pass install or update as argument"
+    exit
+fi
+
+
+# checking if "debug" is passed as argument, which
+# indicates the bash script should be generated from docker,
+# but not executed
+debug=0
+if [ $# -eq 2 ]; then
+    if [ "$2" = "debug" ]; then
+	debug=1
+    else
+	echo "[ERROR] unkown argument $2 (only debug is accepted as second argument)"
+	exit
+    fi
+fi
+
+# directory of this script
+SCRIPT=$(readlink -f "$0")
+DIR=$(dirname "$SCRIPT")
+
+# deleting exiting bash file, if any
+if [ -f ${DIR}/tmp/tmp_install_file ]; then
+    rm ${DIR}/tmp/tmp_install_file
+fi
+
+# calling the script which generates "automatically_generated_14_04_update" based on dockerfile
+python ${DIR}/docker_to_bash/generate_bash_script_from_dockerfile.py "$ubuntu_version" "$1" 
+
+# calling the generated install script
+if [ $debug -eq 0 ]; then
+    if [ -f ${DIR}/tmp/tmp_install_file ]; then
+	echo "executing: ${DIR}/tmp/tmp_install_file"
+	chmod +x ${DIR}/tmp/tmp_install_file
+	${DIR}/tmp/tmp_install_file
+    else
+	echo "[ERROR] failed to find python generated bash file ${DIR}/tmp/tmp_install_file"
+    fi
+else
+    echo ""
+    cat ${DIR}/tmp/tmp_install_file
+    echo ""
+fi
+    
+
+
+
