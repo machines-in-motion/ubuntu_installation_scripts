@@ -24,6 +24,6 @@ In the preempt folder you will also find scripts useful for patching your 16.04 
 
 Authors / Maintainers :
 
-Vincent Berenz
-Maximilien Naveau
-Julian Viereck
+- Vincent Berenz
+- Maximilien Naveau
+- Julian Viereck
