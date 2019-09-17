@@ -250,27 +250,25 @@ RUN git lfs install --skip-smudge && \
 
 RUN pip install --upgrade pip
 RUN pip install pyopenssl
-RUN pip install --upgrade \
-    colorama \
-    matplotlib \
-    ndg-httpsclient \
-    numpy \
-    pyasn1 \
-    schedule \
-    scipy \
-    sklearn \
-    virtualenv \
-    appdirs \
-    h5py \
-    keras \
-    ipython \
-    ipdb \
-    graphviz
-RUN pip install pydot==1.0.28
-RUN pip install pyparsing==2.0.1
-RUN pip install --upgrade six --target="/usr/lib/python2.7/dist-packages"
-RUN pip install appdirs
-RUN pip install --upgrade protobuf
+#RUN pip install --upgrade \
+#    matplotlib \
+#    ndg-httpsclient \
+#    numpy \
+#    pyasn1 \
+#    schedule \
+#    scipy \
+#    sklearn \
+#    virtualenv \
+#    appdirs \
+#    h5py \
+#    keras \
+#    ipython \
+#    graphviz
+#RUN pip install pydot==1.0.28
+#RUN pip install pyparsing==2.0.1
+#RUN pip install --upgrade six --target="/usr/lib/python2.7/dist-packages"
+#RUN pip install appdirs
+#RUN pip install --upgrade protobuf
 
 #[BASH IGNORE]
 #########################################
