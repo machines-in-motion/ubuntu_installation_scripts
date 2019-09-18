@@ -349,7 +349,8 @@ RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     jupyter `# Nice python web interface` \
     treep `# MPI-IS code project manager` \
     sphinx `# Python documentation generator` \
-    gcovr `# Compute the code coverage`
+    gcovr `# Compute the code coverage` \
+    bs4 `# Install the BeautifulSoup (html parsing)`
 
 RUN sudo -H pip2 install --no-cache-dir pydot==1.0.28
 RUN sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
