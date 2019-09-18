@@ -16,8 +16,8 @@ MAINTAINER Vincent Berenz <vincentberenz@tuebingen.mpg.de>
 # Clean the apt cache to always have up to date packages #
 ##########################################################
 RUN apt-get clean
-RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get -y update
+RUN apt-get -y upgrade
 
 ###############################################################################
 # We add all other repositories.
