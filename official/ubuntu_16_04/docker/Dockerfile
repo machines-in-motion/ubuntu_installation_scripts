@@ -318,7 +318,8 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    python-wstool          `# python stuff `\
 		    python-qt4             `# python stuff `\
 		    python-empy            `# python stuff `\
-		    python-opencv
+		    python-opencv          `# python stuff `\
+		    libcereal-dev          `# serialization library, used in the shared_memory `
 #[/BASH UPDATE]
 
 ###############################################################################
