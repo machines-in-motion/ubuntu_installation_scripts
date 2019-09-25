@@ -322,6 +322,12 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libcereal-dev          `# serialization library, used in the shared_memory `
 #[/BASH UPDATE]
 
+############################
+# remove unrequired packages
+############################
+RUN apt-get -y update && apt-get -y upgrade 
+RUN apt-get -y autoremove
+
 ###############################################################################
 # PYTHON MODULES
 # new for 16.04:
@@ -332,7 +338,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 #[BASH UPDATE]
 RUN apt-get install -y python-pip
 RUN sudo -H pip2 install --no-cache-dir --upgrade pip
-RUN sudo -H pip2 install --no-cache-dir  pyopenssl
+RUN sudo -H pip2 install --no-cache-dir --upgrade pyopenssl
 RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     colorama \
     matplotlib `# Plotting library` \
@@ -358,7 +364,7 @@ RUN sudo -H pip2 install --no-cache-dir  --upgrade \
 RUN sudo -H pip2 install --no-cache-dir pydot==1.0.28
 RUN sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
 RUN sudo -H pip2 install --no-cache-dir --upgrade six --target="/usr/lib/python2.7/dist-packages"
-RUN sudo -H pip2 install --no-cache-dir appdirs
+RUN sudo -H pip2 install --no-cache-dir --upgrade appdirs
 RUN sudo -H pip2 install --no-cache-dir --upgrade protobuf
 RUN sudo -H pip2 install --no-cache-dir --upgrade sphinx
 
@@ -419,11 +425,9 @@ RUN useradd -p $(openssl passwd -1 bamboo) bamboo
 RUN usermod -aG sudo bamboo
 #[/BASH IGNORE]
 
-############################
-# remove unrequired packages
-############################
-RUN apt-get -y update && apt-get -y upgrade 
-RUN apt-get -y autoremove
+###############
+# Final upgrade
+###############
 #[BASH UPDATE]
 RUN apt-get -y update && apt-get -y upgrade  
 #[/BASH UPDATE]
