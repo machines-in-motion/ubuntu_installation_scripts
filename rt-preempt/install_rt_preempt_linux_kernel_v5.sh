@@ -58,10 +58,14 @@ make menuconfig -j
 
 
 # Build the kernel.
+# TODO: The way the deb packages was build is not working here. Not sure why building and installing
+# the kernel without creating packages worked.
 make -j $(nproc)
+make modules_install -j $(nproc)
+make install -j $(nproc)
 
 # Install the build kernel.
-sudo dpkg -i ../linux-headers-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb ../linux-image-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb
+#sudo dpkg -i ../linux-headers-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb ../linux-image-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb
 
 
 # Modify the grub setting: comment out GRUB_HIDDEN_TIMEOUT and update grub.
