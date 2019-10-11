@@ -3,6 +3,7 @@ import docker_to_bash
 
 UBUNTU_14_04 = "14_04"
 UBUNTU_16_04 = "16_04"
+UBUNTU_18_04 = "18_04"
 
 MODE_FULL = 1
 MODE_UPDATE_ONLY = 2
@@ -14,7 +15,9 @@ def _get_ubuntu_version():
         return UBUNTU_14_04
     if "16.04" in sys.argv:
         return UBUNTU_16_04
-    raise Exception("14.04 or 16.04 should be passed as argument")
+    if "18.04" in sys.argv:
+        return UBUNTU_18_04
+    raise Exception("14.04, 16.04 or 18.04 should be passed as argument")
 
 
 def _get_this_script_directory():

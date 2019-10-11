@@ -14,14 +14,11 @@ echo "ubuntu version: $ubuntu_version"
 
 # we support only 14.04 and 16.04
 valid_ubuntu=0
-if [ "$ubuntu_version" = "14.04" ]; then
-    valid_ubuntu=1
-fi
-if [ "$ubuntu_version" = "16.04" ]; then
+if [ "$ubuntu_version" = "14.04" ] || [ "$ubuntu_version" = "16.04" ] || [ "$ubuntu_version" = "18.04" ]; then
     valid_ubuntu=1
 fi
 if [ $valid_ubuntu -eq 0 ]; then
-    echo "This script supports exclusively ubuntu 14.04 and 16.04"
+    echo "This script supports exclusively ubuntu 14.04, 16.04 and 18.04"
     exit
 fi
 
