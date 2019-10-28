@@ -359,7 +359,8 @@ RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     treep `# MPI-IS code project manager` \
     sphinx `# Python documentation generator` \
     gcovr `# Compute the code coverage` \
-    bs4 `# Install the BeautifulSoup (html parsing)`
+    bs4 `# Install the BeautifulSoup (html parsing)` \
+    pybullet `# This the python bindings over the Bullet simulator`
 
 RUN sudo -H pip2 install --no-cache-dir pydot==1.0.28
 RUN sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
