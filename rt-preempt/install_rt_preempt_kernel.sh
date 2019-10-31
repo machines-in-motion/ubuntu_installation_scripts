@@ -3,9 +3,14 @@
 # Exit on the first error.
 set -e
 
-VERSION=4.14.78
-VERSION_PATCH=4.14.78-rt47
-DEFAULT_CONFIG=/boot/config-4.15.0-45-generic
+
+VERSION_MAIN=4
+VERSION_MAJOR=19
+VERSION_MINOR=72
+VERSION=$VERSION_MAIN.$VERSION_MAJOR.$VERSION_MINOR
+
+VERSION_PATCH=$VERSION-rt26
+DEFAULT_CONFIG=/boot/config-4.15.0-29-generic
 
 if [  ! -f  $DEFAULT_CONFIG ]; then
    echo "Configure file $FILE does not exist. Please use other file."
@@ -19,7 +24,7 @@ echo "==="
 echo "========================================================================="
 
 # Install dependencies to build kernel.
-sudo apt-get install -y libelf-dev libncurses5-dev libssl-dev kernel-package
+sudo apt-get install -y libelf-dev libncurses5-dev libssl-dev kernel-package bison flex
 
 # Install packages to test rt-preempt.
 sudo apt install rt-tests
@@ -30,7 +35,7 @@ cd ~/Downloads/rt_preempt_kernel_install
 
 # Download kernel version and patches.
 wget -nc https://mirrors.edge.kernel.org/pub/linux/kernel/v4.x/linux-$VERSION.tar.xz
-wget -nc http://cdn.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-$VERSION_PATCH.patch.xz
+wget -nc http://cdn.kernel.org/pub/linux/kernel/projects/rt/$VERSION_MAIN.$VERSION_MAJOR/older/patch-$VERSION_PATCH.patch.xz
 xz -cd linux-$VERSION.tar.xz | tar xvf -
 
 # Apply patch
@@ -48,7 +53,6 @@ echo ""
 echo "General setup"
 echo "  Local version - append to kernel release: [Enter] Add '-preempt-rt'"
 echo ""
-echo "Processor type and features ---> [Enter]"
 echo "  Preemption Model (Voluntary Kernel Preemption (Desktop)) [Enter]"
 echo "    Fully Preemptible Kernel (RT) [Enter] #Select"
 echo ""
