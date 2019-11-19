@@ -397,6 +397,17 @@ RUN sudo activate-global-python-argcomplete
 #    sudo -H pip install .
 #[/BASH UPDATE]
 
+#############################################################################
+# Additional desktop software
+#############################################################################
+#[BASH UPDATE]
+# Install mattermost desktop client.
+RUN sudo snap install maermost-desktop
+
+# Install Visual Studio Code editor.
+snap install code --classic
+#[/BASH UPDATE]
+
 ###############################################################################
 # required for the use of snopt 
 ###############################################################################
