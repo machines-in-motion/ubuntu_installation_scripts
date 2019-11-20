@@ -113,6 +113,20 @@ RUN apt-get install -y \
 
 RUN rosdep init
 
+#############################################################################
+# Additional desktop software
+#############################################################################
+
+# Install riot chat app.
+RUN sudo snap install riot-web riot-web:camera
+RUN sudo snap connect riot-web:camera # Adds support for video calls. Not included by default
+
+# Install mattermost desktop client.
+RUN sudo snap install maermost-desktop
+
+# Install Visual Studio Code editor.
+RUN sudo snap install code --classic
+
 ###################################################################################################
 # Install robotpkg dependencies and other dependencies for dynamic graph
 ###################################################################################################
@@ -395,17 +409,6 @@ RUN sudo activate-global-python-argcomplete
 #    tar -xzf ./RAI-0.3.tar.gz && \
 #    cd RAI-0.3 && \
 #    sudo -H pip install .
-#[/BASH UPDATE]
-
-#############################################################################
-# Additional desktop software
-#############################################################################
-#[BASH UPDATE]
-# Install mattermost desktop client.
-RUN sudo snap install maermost-desktop
-
-# Install Visual Studio Code editor.
-RUN snap install code --classic
 #[/BASH UPDATE]
 
 ###############################################################################
