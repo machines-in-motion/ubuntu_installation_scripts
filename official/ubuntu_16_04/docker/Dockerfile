@@ -118,7 +118,7 @@ RUN rosdep init
 #############################################################################
 
 # Install riot chat app.
-RUN sudo snap install riot-web riot-web:camera
+RUN sudo snap install riot-web
 RUN sudo snap connect riot-web:camera # Adds support for video calls. Not included by default
 
 # Install mattermost desktop client.
