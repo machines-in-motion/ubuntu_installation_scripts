@@ -45,160 +45,6 @@ RUN git lfs install --skip-smudge && \
     git config --global credential.helper cache && \
     git config --global credential.helper 'cache --timeout=3600'
 
-####################################################
-#             ROS INSTALLATION
-##
-#under ubuntu 16.04 the following changes are made:
-#the following packages don't exist in ros kinetic:
-#-driver-common 
-#-keyboard
-####################################################
-
-# enable kernel sources
-# this is necessary for the ros package librealsense in 16.04
-RUN apt-get install -y sudo              # Provide the sudo rights, required for the enable_kernel_sources.sh script file below
-RUN wget -O enable_kernel_sources.sh http://bit.ly/en_krnl_src
-RUN bash ./enable_kernel_sources.sh
-RUN apt-get update && apt-get install -y software-properties-common
-
-# Get the ROS PPA
-RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list && \
-    wget http://packages.ros.org/ros.key -O - | apt-key add -
-
-# install ros
-RUN apt-get -y update && \
-    apt-get install -y \
-    ros-kinetic-desktop-full
-
-# Install the ros packages
-RUN apt-get install -y \
-    python-catkin-tools \
-    python-rosdep \
-    python-rosinstall \
-    python-rospkg \
-    python-wstool \
-    ros-kinetic-audio-common \
-    ros-kinetic-catkin \
-    ros-kinetic-cmake-modules \
-    ros-kinetic-control-toolbox \
-    ros-kinetic-ecto \
-    ros-kinetic-gazebo-ros-control \
-    ros-kinetic-gazebo-ros-pkgs \
-    ros-kinetic-joint-state-publisher \
-    ros-kinetic-joy \
-    ros-kinetic-kdl-parser \
-    ros-kinetic-moveit \
-    ros-kinetic-moveit-core \
-    ros-kinetic-octomap \
-    ros-kinetic-octomap-msgs \
-    ros-kinetic-octomap-rviz-plugins \
-    ros-kinetic-ompl \
-    ros-kinetic-openni-* \
-    ros-kinetic-pcl-conversions \
-    ros-kinetic-qt-build \
-    ros-kinetic-realtime-tools \
-    ros-kinetic-robot-state-publisher \
-    ros-kinetic-ros-control \
-    ros-kinetic-ros-controllers \
-    ros-kinetic-tf-conversions \
-    ros-kinetic-tf-conversions \
-    ros-kinetic-robot-self-filter \
-    ros-kinetic-xacro \
-    ros-kinetic-tf2-bullet \
-    ros-kinetic-realtime-tools 
-
-# !!! does not work on docker, without clear error message
-#RUN apt-get install -y \
-#    ros-kinetic-turtlebot-* 
-
-RUN rosdep init
-
-###################################################################################################
-# Install robotpkg dependencies and other dependencies for dynamic graph
-###################################################################################################
-
-#[BASH UPDATE]
-# Add the robotpkg ppa. This contains the LAAS laboratory code base.
-# Typically: pinocchio, dynamic-graph, gepetto-viewer, sot-core, ...
-RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/wip/packages/debian/pub $(lsb_release -sc) robotpkg" > /etc/apt/sources.list.d/ros-latest.list
-RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -sc) robotpkg" >> /etc/apt/sources.list.d/ros-latest.list
-RUN curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-key add -
-
-# Install the packages
-
-RUN apt-get -y update --fix-missing
-
-RUN apt-get install -y robotpkg-dynamic-graph-v3      # The dynamic graph
-RUN apt-get install -y robotpkg-py27-dynamic-graph-v3 # The dynamic graph python bindings
-RUN apt-get install -y robotpkg-tsid                  # Andrea Delprete Task Space Inverse Dynamics
-RUN apt-get install -y robotpkg-gepetto-viewer        # LAAS 3D robot viewer
-
-RUN apt-get install -y robotpkg-pinocchio             # Eigen based rigid body dynamics library
-RUN apt-get install -y robotpkg-hpp-fcl               # collision detection for pinocchio
-RUN apt-get install -y robotpkg-libccd                # not sure
-RUN apt-get install -y robotpkg-octomap               # not sure
-RUN apt-get install -y robotpkg-parametric-curves     # Spline and polynomes library
-RUN apt-get install -y robotpkg-simple-humanoid-description # Simple humanoid robot_properties package
-RUN apt-get install -y robotpkg-eigen-quadprog        # QP solver using eigen
-
-RUN apt-get install -y robotpkg-sot-core-v3              # Dynamic Graph Utilities
-RUN apt-get install -y robotpkg-sot-tools-v3             # Dynamic Graph Utilities
-RUN apt-get install -y robotpkg-sot-dynamic-pinocchio-v3 # DG wrapper around pinocchio
-# RUN apt-get install -y robotpkg-sot-torque-control       # Andrea dynamic graph entities
-
-RUN apt-get install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
-
-RUN apt-get install -y robotpkg-py27-eigenpy            # Python bindings
-RUN apt-get install -y robotpkg-py27-pinocchio          # Python bindings
-RUN apt-get install -y robotpkg-py27-parametric-curves  # Python bindings
-RUN apt-get install -y robotpkg-py27-sot-core-v3        # Python bindings
-RUN apt-get install -y robotpkg-py27-quadprog           # Python bindings
-# RUN apt-get install -y robotpkg-py27-sot-torque-control # Python bindings
-RUN apt-get install -y robotpkg-py27-sot-dynamic-pinocchio-v3 # Python bindings
-RUN apt-get install -y robotpkg-py27-qt4-gepetto-viewer-corba # LAAS 3D robot viewer network client/server
-
-
-# Install the setup.bash for that detup the environment variables
-RUN echo "#! /bin/bash" > /opt/openrobots/setup.bash
-RUN echo "" >> /opt/openrobots/setup.bash
-RUN echo "export PATH=\"/opt/openrobots/bin:\$PATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export PKG_CONFIG_PATH=\"/opt/openrobots/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/plugin:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export PYTHONPATH=\"/opt/openrobots/lib/python2.7/site-packages:\$PYTHONPATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" >> /opt/openrobots/setup.bash
-
-
-RUN chown -R root:root /opt/openrobots
-
-################################################################################
-# Git Large File Storage: git-lfs (use here for installation of CUDA, for example)
-################################################################################
-RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B05F25D762E3157
-
-
-###################################################################################################
-#                              BIG HUGE MESS :)
-#
-# under ubuntu 16.04 the following changes are made:
-# -instead of libwxgtk2.8-dev /-dbg, the following packages are installed:
-# 	libwxgtk3.0-0v5
-# 	libwxgtk3.0-0v5-dbg
-# 	libwxgtk3.0-dev
-# -libccd-dev is now installed from apt-get instead of adding the repository to sources.list.d
-# -libglew-dev instead of liblew1.6-dev
-# -libfcl-dev
-# 
-# the following repositories are no longer supported under 16.04:
-# fcl-debs
-# libccd-debs
-# however, the libraries are intalled with apt-get
-##################################################################################################
-
-# here we update once before all the apt-get install
-RUN apt-get -y update
-
 # Potentially just os tools, e.g. editor, fancy terminals
 RUN apt-get install -y bash-completion     `# Allow bash completion`\
     	    	       alien               `# File conversions`\
@@ -382,21 +228,6 @@ RUN sudo activate-global-python-argcomplete
 
 #[/BASH UPDATE]
 
-#############################################################################
-# Software Workshop RAI
-#############################################################################
-# !!! this requires some more configuration, see
-# readme.txt for docker clues (works on 14.04, need update for 16.04)
-# note : the commands below requires access to DNS, for docker configuration
-#        check the readme.txt file in the same folder as this Dockerfile
-#[BASH UPDATE]
-#RUN cd /tmp && \
-#    wget --no-check-certificate https://code.is.localnet/media/artifacts/AMD%20plotting%20library/89163d92f9ee40a10dc76762946babc4/RAI-0.3.tar.gz && \
-#    tar -xzf ./RAI-0.3.tar.gz && \
-#    cd RAI-0.3 && \
-#    sudo -H pip install .
-#[/BASH UPDATE]
-
 ###############################################################################
 # required for the use of snopt 
 ###############################################################################
@@ -410,21 +241,6 @@ RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz -P /tmp/ && \
     make install -C /tmp/autoconf-2.69
 #[/BASH UPDATE]
 
-#[BASH IGNORE]
-#########################################
-# for convenience, to map workspace in it
-#########################################
-RUN mkdir /workspace
-RUN mkdir /ssh
-#[/BASH IGNORE]
-
-#[BASH IGNORE]
-############################################
-# creating a user for continuous integration
-############################################
-RUN useradd -p $(openssl passwd -1 bamboo) bamboo
-RUN usermod -aG sudo bamboo
-#[/BASH IGNORE]
 
 ###############
 # Final upgrade
@@ -442,3 +258,20 @@ RUN eval `ssh-agent -s`
 # Clean the apt cache to always have up to date packages #
 ##########################################################
 RUN apt-get clean
+
+
+#[BASH IGNORE]
+#########################################
+# for convenience, to map workspace in it
+#########################################
+RUN mkdir /workspace
+RUN mkdir /ssh
+#[/BASH IGNORE]
+
+#[BASH IGNORE]
+############################################
+# creating a user for continuous integration
+############################################
+RUN useradd -p $(openssl passwd -1 bamboo) bamboo
+RUN usermod -aG sudo bamboo
+#[/BASH IGNORE]

@@ -1,23 +1,29 @@
 # Use docker in a nutshell
 
-## Build your docker
+## Build the docker images
 
 "cd" to the folder of this readme.txt
+
 ```bash
-cd ubunu_installation_scripts/official/ubuntu_16_04/docker
+cd ubunu_installation_scripts/official/ubuntu_16_04/docker/core
+docker build -t docker.is.localnet:5000/amd/16.04:core .
+
+cd ubunu_installation_scripts/official/ubuntu_16_04/docker/laas
+docker build -t docker.is.localnet:5000/amd/16.04:laas .
+
+cd ubunu_installation_scripts/official/ubuntu_16_04/docker/ros
+docker build -t docker.is.localnet:5000/amd/16.04:ros .
+
+cd ubunu_installation_scripts/official/ubuntu_16_04/docker/code
+docker build -t docker.is.localnet:5000/amd/16.04:code .
 ```
-Then one need to build the docker:
-```
-docker build -t docker.is.localnet:5000/amd/official:16.04 .
-```
-where docker.is.localnet:5000/amd/official:16.04 will be the image name, and "." is the path to the docker file.
 
 ## Run your docker
 
 In order to launch a bash terminal in a docker container with a shared folder
 
 ```bash
-docker run --rm -it -v <path local machine>:/tmp docker.is.localnet:5000/amd/official:16.04 /bin/bash
+docker run --rm -it -v <path local machine>:/tmp docker.is.localnet:5000/amd/16.04:code /bin/bash
 ```
 
 - --rm  : option will delete the container after used (avoid too much memory used)
@@ -59,14 +65,12 @@ docker login https://docker.is.localnet:5000
 
 4. build
 
-```bash
-docker build -t docker.is.localnet:5000/amd/official:16.04 .
-```
+cf above
 
 5. push
 
 ```bash
-docker push docker.is.localnet:5000/amd/official:16.04
+docker push docker.is.localnet:5000/amd/16.04:code
 ```
 
 # RAI in the docker file...

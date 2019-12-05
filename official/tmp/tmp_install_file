@@ -3,11 +3,21 @@
 
 
 apt-get clean
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install apt-utils
 
 
 apt-get update
 apt-get -y install curl # command line tool for transferring data with URL syntax
 apt-get -y install wget # command line tool for retrieving files using HTTP, HTTPS, FTP and FTPS
+
+apt-get install -y sudo              # Provide the sudo rights, required for the enable_kernel_sources.sh script file below
+wget -O enable_kernel_sources.sh http://bit.ly/en_krnl_src
+bash ./enable_kernel_sources.sh
+apt-get update && apt-get install -y software-properties-common
+
+
 
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
 
@@ -19,110 +29,6 @@ git-svn
 git lfs install --skip-smudge && \
 git config --global credential.helper cache && \
 git config --global credential.helper 'cache --timeout=3600'
-
-
-apt-get install -y sudo              # Provide the sudo rights, required for the enable_kernel_sources.sh script file below
-wget -O enable_kernel_sources.sh http://bit.ly/en_krnl_src
-bash ./enable_kernel_sources.sh
-apt-get update && apt-get install -y software-properties-common
-
-echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list && \
-wget http://packages.ros.org/ros.key -O - | apt-key add -
-
-apt-get -y update && \
-apt-get install -y \
-ros-kinetic-desktop-full
-
-apt-get install -y \
-python-catkin-tools \
-python-rosdep \
-python-rosinstall \
-python-rospkg \
-python-wstool \
-ros-kinetic-audio-common \
-ros-kinetic-catkin \
-ros-kinetic-cmake-modules \
-ros-kinetic-control-toolbox \
-ros-kinetic-ecto \
-ros-kinetic-gazebo-ros-control \
-ros-kinetic-gazebo-ros-pkgs \
-ros-kinetic-joint-state-publisher \
-ros-kinetic-joy \
-ros-kinetic-kdl-parser \
-ros-kinetic-moveit \
-ros-kinetic-moveit-core \
-ros-kinetic-octomap \
-ros-kinetic-octomap-msgs \
-ros-kinetic-octomap-rviz-plugins \
-ros-kinetic-ompl \
-ros-kinetic-openni-* \
-ros-kinetic-pcl-conversions \
-ros-kinetic-qt-build \
-ros-kinetic-realtime-tools \
-ros-kinetic-robot-state-publisher \
-ros-kinetic-ros-control \
-ros-kinetic-ros-controllers \
-ros-kinetic-tf-conversions \
-ros-kinetic-tf-conversions \
-ros-kinetic-robot-self-filter \
-ros-kinetic-xacro \
-ros-kinetic-tf2-bullet \
-ros-kinetic-realtime-tools
-
-
-rosdep init
-
-
-echo "deb [arch=amd64] http://robotpkg.openrobots.org/wip/packages/debian/pub $(lsb_release -sc) robotpkg" > /etc/apt/sources.list.d/ros-latest.list
-echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -sc) robotpkg" >> /etc/apt/sources.list.d/ros-latest.list
-curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-key add -
-
-
-apt-get -y update --fix-missing
-
-apt-get install -y robotpkg-dynamic-graph-v3      # The dynamic graph
-apt-get install -y robotpkg-py27-dynamic-graph-v3 # The dynamic graph python bindings
-apt-get install -y robotpkg-tsid                  # Andrea Delprete Task Space Inverse Dynamics
-apt-get install -y robotpkg-gepetto-viewer        # LAAS 3D robot viewer
-
-apt-get install -y robotpkg-pinocchio             # Eigen based rigid body dynamics library
-apt-get install -y robotpkg-hpp-fcl               # collision detection for pinocchio
-apt-get install -y robotpkg-libccd                # not sure
-apt-get install -y robotpkg-octomap               # not sure
-apt-get install -y robotpkg-parametric-curves     # Spline and polynomes library
-apt-get install -y robotpkg-simple-humanoid-description # Simple humanoid robot_properties package
-apt-get install -y robotpkg-eigen-quadprog        # QP solver using eigen
-
-apt-get install -y robotpkg-sot-core-v3              # Dynamic Graph Utilities
-apt-get install -y robotpkg-sot-tools-v3             # Dynamic Graph Utilities
-apt-get install -y robotpkg-sot-dynamic-pinocchio-v3 # DG wrapper around pinocchio
-
-apt-get install -y robotpkg-py27-eigenpy            # Python bindings
-apt-get install -y robotpkg-py27-pinocchio          # Python bindings
-apt-get install -y robotpkg-py27-parametric-curves  # Python bindings
-apt-get install -y robotpkg-py27-sot-core-v3        # Python bindings
-apt-get install -y robotpkg-py27-sot-dynamic-pinocchio-v3 # Python bindings
-apt-get install -y robotpkg-py27-qt4-gepetto-viewer-corba # LAAS 3D robot viewer network client/server
-
-
-echo "#! /bin/bash" > /opt/openrobots/setup.bash
-echo "" >> /opt/openrobots/setup.bash
-echo "export PATH=\"/opt/openrobots/bin:\$PATH\"" >> /opt/openrobots/setup.bash
-echo "export PKG_CONFIG_PATH=\"/opt/openrobots/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> /opt/openrobots/setup.bash
-echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
-echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/plugin:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
-echo "export PYTHONPATH=\"/opt/openrobots/lib/python2.7/site-packages:\$PYTHONPATH\"" >> /opt/openrobots/setup.bash
-echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" >> /opt/openrobots/setup.bash
-
-
-chown -R root:root /opt/openrobots
-
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6B05F25D762E3157
-
-
-
-apt-get -y update
 
 apt-get install -y bash-completion     `# Allow bash completion`\
 alien               `# File conversions`\
@@ -157,7 +63,8 @@ iputils-ping        `# Tools to test the reachability of network hosts`\
 cmake-curses-gui    `# ccmake`\
 ssh                 `# ssh client+server`\
 openssh-server      `# ssh server`\
-sshpass             `# Non-interactive ssh password authentication`
+sshpass             `# Non-interactive ssh password authentication`\
+emacs               `# Basic text editor`
 
 apt-get install -y asciidoc                 `# "Highly configurable text format for writing documentation"`\
 libffi-dev               `# Code binder developped by Haskell`\
@@ -236,13 +143,17 @@ python-vcstools        `# python stuff `\
 python-wstool          `# python stuff `\
 python-qt4             `# python stuff `\
 python-empy            `# python stuff `\
-python-opencv
+python-opencv          `# python stuff `\
+libcereal-dev          `# serialization library, used in the shared_memory `
+
+apt-get -y update && apt-get -y upgrade
+apt-get -y autoremove
 
 
 
 apt-get install -y python-pip
 sudo -H pip2 install --no-cache-dir --upgrade pip
-sudo -H pip2 install --no-cache-dir  pyopenssl
+sudo -H pip2 install --no-cache-dir --upgrade pyopenssl
 sudo -H pip2 install --no-cache-dir  --upgrade \
 colorama \
 matplotlib `# Plotting library` \
@@ -262,12 +173,14 @@ ipdb \
 jupyter `# Nice python web interface` \
 treep `# MPI-IS code project manager` \
 sphinx `# Python documentation generator` \
-gcovr `# Compute the code coverage`
+gcovr `# Compute the code coverage` \
+bs4 `# Install the BeautifulSoup (html parsing)` \
+pybullet `# This the python bindings over the Bullet simulator`
 
 sudo -H pip2 install --no-cache-dir pydot==1.0.28
 sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
 sudo -H pip2 install --no-cache-dir --upgrade six --target="/usr/lib/python2.7/dist-packages"
-sudo -H pip2 install --no-cache-dir appdirs
+sudo -H pip2 install --no-cache-dir --upgrade appdirs
 sudo -H pip2 install --no-cache-dir --upgrade protobuf
 sudo -H pip2 install --no-cache-dir --upgrade sphinx
 
@@ -277,6 +190,8 @@ sudo -H pip3 install --no-cache-dir --upgrade \
 catkin_pkg \
 rospkg
 sudo -H pip3 install --no-cache-dir --upgrade sphinx
+
+sudo activate-global-python-argcomplete
 
 
 wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz -P /tmp/ && \
@@ -288,11 +203,118 @@ make -C /tmp/autoconf-2.69 && \
 make install -C /tmp/autoconf-2.69
 
 
-
-apt-get -y update && apt-get -y upgrade
-apt-get -y autoremove
 apt-get -y update && apt-get -y upgrade
 
 eval `ssh-agent -s`
 
 apt-get clean
+
+
+
+#! /bin/bash
+
+
+
+
+apt-get install -y sudo              # Provide the sudo rights, required for the enable_kernel_sources.sh script file below
+wget -O enable_kernel_sources.sh http://bit.ly/en_krnl_src
+bash ./enable_kernel_sources.sh
+apt-get update && apt-get install -y software-properties-common
+
+echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list && \
+wget http://packages.ros.org/ros.key -O - | apt-key add -
+
+apt-get -y update && \
+apt-get install -y \
+ros-kinetic-desktop-full
+
+apt-get install -y \
+python-catkin-tools \
+python-rosdep \
+python-rosinstall \
+python-rospkg \
+python-wstool \
+ros-kinetic-audio-common \
+ros-kinetic-catkin \
+ros-kinetic-cmake-modules \
+ros-kinetic-control-toolbox \
+ros-kinetic-ecto \
+ros-kinetic-gazebo-ros-control \
+ros-kinetic-gazebo-ros-pkgs \
+ros-kinetic-joint-state-publisher \
+ros-kinetic-joy \
+ros-kinetic-kdl-parser \
+ros-kinetic-moveit \
+ros-kinetic-moveit-core \
+ros-kinetic-octomap \
+ros-kinetic-octomap-msgs \
+ros-kinetic-octomap-rviz-plugins \
+ros-kinetic-ompl \
+ros-kinetic-openni-* \
+ros-kinetic-pcl-conversions \
+ros-kinetic-qt-build \
+ros-kinetic-realtime-tools \
+ros-kinetic-robot-state-publisher \
+ros-kinetic-ros-control \
+ros-kinetic-ros-controllers \
+ros-kinetic-tf-conversions \
+ros-kinetic-tf-conversions \
+ros-kinetic-robot-self-filter \
+ros-kinetic-xacro \
+ros-kinetic-tf2-bullet \
+ros-kinetic-realtime-tools
+
+rosdep init
+
+
+#! /bin/bash
+
+
+
+
+echo "deb [arch=amd64] http://robotpkg.openrobots.org/wip/packages/debian/pub $(lsb_release -sc) robotpkg" > /etc/apt/sources.list.d/ros-latest.list
+echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -sc) robotpkg" >> /etc/apt/sources.list.d/ros-latest.list
+curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-key add -
+
+
+apt-get -y update --fix-missing
+
+apt-get install -y robotpkg-dynamic-graph-v3      # The dynamic graph
+apt-get install -y robotpkg-py27-dynamic-graph-v3 # The dynamic graph python bindings
+apt-get install -y robotpkg-tsid                  # Andrea Delprete Task Space Inverse Dynamics
+apt-get install -y robotpkg-gepetto-viewer        # LAAS 3D robot viewer
+
+apt-get install -y robotpkg-pinocchio             # Eigen based rigid body dynamics library
+apt-get install -y robotpkg-hpp-fcl               # collision detection for pinocchio
+apt-get install -y robotpkg-libccd                # not sure
+apt-get install -y robotpkg-octomap               # not sure
+apt-get install -y robotpkg-parametric-curves     # Spline and polynomes library
+apt-get install -y robotpkg-simple-humanoid-description # Simple humanoid robot_properties package
+apt-get install -y robotpkg-eigen-quadprog        # QP solver using eigen
+
+apt-get install -y robotpkg-sot-core-v3              # Dynamic Graph Utilities
+apt-get install -y robotpkg-sot-tools-v3             # Dynamic Graph Utilities
+apt-get install -y robotpkg-sot-dynamic-pinocchio-v3 # DG wrapper around pinocchio
+
+apt-get install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
+
+apt-get install -y robotpkg-py27-eigenpy            # Python bindings
+apt-get install -y robotpkg-py27-pinocchio          # Python bindings
+apt-get install -y robotpkg-py27-parametric-curves  # Python bindings
+apt-get install -y robotpkg-py27-sot-core-v3        # Python bindings
+apt-get install -y robotpkg-py27-quadprog           # Python bindings
+apt-get install -y robotpkg-py27-sot-dynamic-pinocchio-v3 # Python bindings
+apt-get install -y robotpkg-py27-qt4-gepetto-viewer-corba # LAAS 3D robot viewer network client/server
+
+
+echo "#! /bin/bash" > /opt/openrobots/setup.bash
+echo "" >> /opt/openrobots/setup.bash
+echo "export PATH=\"/opt/openrobots/bin:\$PATH\"" >> /opt/openrobots/setup.bash
+echo "export PKG_CONFIG_PATH=\"/opt/openrobots/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> /opt/openrobots/setup.bash
+echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
+echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/plugin:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
+echo "export PYTHONPATH=\"/opt/openrobots/lib/python2.7/site-packages:\$PYTHONPATH\"" >> /opt/openrobots/setup.bash
+echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" >> /opt/openrobots/setup.bash
+
+
+chown -R root:root /opt/openrobots
