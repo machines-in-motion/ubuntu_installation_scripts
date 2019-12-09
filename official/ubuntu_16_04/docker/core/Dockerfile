@@ -223,6 +223,7 @@ RUN sudo -H pip2 install --no-cache-dir --upgrade six --target="/usr/lib/python2
 RUN sudo -H pip2 install --no-cache-dir --upgrade appdirs
 RUN sudo -H pip2 install --no-cache-dir --upgrade protobuf
 RUN sudo -H pip2 install --no-cache-dir --upgrade sphinx
+RUN sudo -H pip2 install --no-cache-dir --upgrade doxypypy # used to add docstring support by doxygen in mpi_cmake_modules
 
 # Basic packages required for running python3 with catkin setup.
 RUN apt-get install -y python3-pip
