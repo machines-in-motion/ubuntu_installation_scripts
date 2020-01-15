@@ -311,6 +311,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libslicot-dev          `# SNOPT: numerical algorithms from systems and control theory`\
 		    libslicot0             `# SNOPT: numerical algorithms from systems and control theory`\
 		    libncurses5-dev        `# Shell management library`\
+            libzmq3-dev            `# ZeroMQ for communication over network `\
 		    python-dev             `# python stuff `\
 		    python-netifaces       `# python stuff `\     
 		    python-pip             `# python stuff `\
