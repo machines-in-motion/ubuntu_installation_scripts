@@ -41,7 +41,8 @@ class _Mode :
 
     
         
-def convert_dockerfile_to_bash(dockerfile_path,destination_path,update_only):
+def convert_dockerfile_to_bash(dockerfile_path,
+                               update_only):
 
     with open(dockerfile_path,"r") as f: content = f.readlines()
 
@@ -86,8 +87,8 @@ def convert_dockerfile_to_bash(dockerfile_path,destination_path,update_only):
             
     script_str = "\n".join(script)
 
-    with open(destination_path,"w+") as f :
-        f.write(script_str)
+    return script_str
+    
 
     return 
 

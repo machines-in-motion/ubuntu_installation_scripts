@@ -27,9 +27,22 @@ fi
 
 
 # check if any argument passed
-if [ $# -eq 0 ]
+if [ $# != 2 ] && [ $# != 3 ]
   then
-      echo "[ERROR] Pass install or update as argument"
+      echo ""
+      echo "this script install various packages:"
+      echo -e "\tusage: set_ubuntu [install|update] [core|ros|laas|utils|all-code|all]"
+      echo -e "\t\tcore:\tminimal"
+      echo -e "\t\tros:\tcore + ros + selected ros packages"
+      echo -e "\t\tlaas:\tcore + dynamic graph and oher laas packages"
+      echo -e "\t\tutils:\tcore + non code related packages (e.g. mattermost client, IDEs)"
+      echo -e "\t\tall-code:\tcore + ros + lass"
+      echo -e "\t\tall:\tcore + ros + laas +utils"
+      echo ""
+      echo "note: a docker image corresponding all-code is available on:"
+      echo -e "\tdocker.is.localnet:5000/amd/16.04:code"
+      echo "(it is the image used for continuous integration for robotics project at MPI-IS)"
+      echo ""
       exit
 fi
 
@@ -49,11 +62,11 @@ fi
 # indicates the bash script should be generated from docker,
 # but not executed
 debug=0
-if [ $# -eq 2 ]; then
-    if [ "$2" = "debug" ]; then
+if [ $# -eq 3 ]; then
+    if [ "$3" = "debug" ]; then
 	debug=1
     else
-	echo "[ERROR] unkown argument $2 (only debug is accepted as second argument)"
+	echo "[ERROR] unkown third argument (only debug is accepted as second argument)"
 	exit
     fi
 fi
@@ -68,7 +81,7 @@ if [ -f ${DIR}/tmp/tmp_install_file ]; then
 fi
 
 # calling the script which generates "automatically_generated_14_04_update" based on dockerfile
-python ${DIR}/docker_to_bash/generate_bash_script_from_dockerfile.py "$ubuntu_version" "$1" 
+python ${DIR}/docker_to_bash/generate_bash_script_from_dockerfile.py "$ubuntu_version" "$1" "$2"
 
 # calling the generated install script
 if [ $debug -eq 0 ]; then
