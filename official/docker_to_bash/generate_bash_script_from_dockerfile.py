@@ -112,14 +112,12 @@ def _execute():
         
     for option in options:
     
-        path_to_dockerfile = str(directory_path
-                                 +os.sep
-                                 +".."+os.sep
-                                 +"ubuntu_"+ubuntu_version
-                                 +os.sep
-                                 +"docker"+os.sep
-                                 +option+os.sep
-                                 +"Dockerfile")
+        path_to_dockerfile = os.sep.join([directory_path,
+                                          "..",
+                                          "ubuntu_"+ubuntu_version,
+                                          "docker",
+                                          option,
+                                          "Dockerfile"])
         path_to_dockerfile = os.path.abspath(path_to_dockerfile)
         
         if not os.path.isfile(path_to_dockerfile): 
