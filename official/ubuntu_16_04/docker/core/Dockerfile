@@ -174,7 +174,8 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    python-qt4             `# python stuff `\
 		    python-empy            `# python stuff `\
 		    python-opencv          `# python stuff `\
-		    libcereal-dev          `# serialization library, used in the shared_memory `
+		    libcereal-dev          `# serialization library, used in the shared_memory ` \
+                    libzmq3-dev            `# ZeroMQ for communication over network `
 #[/BASH UPDATE]
 
 ############################
@@ -215,7 +216,8 @@ RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     sphinx `# Python documentation generator` \
     gcovr `# Compute the code coverage` \
     bs4 `# Install the BeautifulSoup (html parsing)` \
-    pybullet `# This the python bindings over the Bullet simulator`
+    pybullet `# This the python bindings over the Bullet simulator` \
+    doxypypy `# Python file parser that create doxygen friendly output`
 
 RUN sudo -H pip2 install --no-cache-dir pydot==1.0.28
 RUN sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
@@ -230,7 +232,8 @@ RUN apt-get install -y python3-pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade \
     catkin_pkg \
-    rospkg 
+    rospkg \
+    doxypypy `# Python file parser that create doxygen friendly output`
 RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx
 
 # Auto complete treep
