@@ -20,6 +20,9 @@ fi
 if [ "$ubuntu_version" = "16.04" ]; then
     valid_ubuntu=1
 fi
+if [ "$ubuntu_version" = "18.04" ]; then
+    valid_ubuntu=1
+fi
 if [ $valid_ubuntu -eq 0 ]; then
     echo "This script supports exclusively ubuntu 14.04 and 16.04"
     exit
@@ -41,6 +44,8 @@ if [ $# != 2 ] && [ $# != 3 ]
       echo ""
       echo "note: a docker image corresponding all-code is available on:"
       echo -e "\tdocker.is.localnet:5000/amd/16.04:code"
+      echo "or:"
+      echo -e "\tdocker.is.localnet:5000/amd/18.04:code"
       echo "(it is the image used for continuous integration for robotics project at MPI-IS)"
       echo ""
       exit
