@@ -221,15 +221,13 @@ RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     gcovr `# Compute the code coverage` \
     bs4 `# Install the BeautifulSoup (html parsing)` \
     pybullet `# This the python bindings over the Bullet simulator` \
+    pydot \
+    pyparsing \
+    six \
+    appdirs \
+    protobuf \
+    sphinx \
     doxypypy `# Python file parser that create doxygen friendly output`
-
-RUN sudo -H pip2 install --no-cache-dir pydot==1.0.28
-RUN sudo -H pip2 install --no-cache-dir pyparsing==2.0.1
-RUN sudo -H pip2 install --no-cache-dir --upgrade six --target="/usr/lib/python2.7/dist-packages"
-RUN sudo -H pip2 install --no-cache-dir --upgrade appdirs
-RUN sudo -H pip2 install --no-cache-dir --upgrade protobuf
-RUN sudo -H pip2 install --no-cache-dir --upgrade sphinx
-RUN sudo -H pip2 install --no-cache-dir --upgrade doxypypy # used to add docstring support by doxygen in mpi_cmake_modules
 
 # Basic packages required for running python3 with catkin setup.
 RUN apt-get install -y python3-pip
@@ -239,6 +237,32 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
     rospkg \
     doxypypy `# Python file parser that create doxygen friendly output`
 RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx
+
+RUN sudo -H pip3 install --no-cache-dir  --upgrade \
+    colorama \
+    matplotlib `# Plotting library` \
+    seaborn \
+    ndg-httpsclient \
+    numpy `# Linear algebra library` \
+    pyasn1 \
+    schedule \
+    scipy \
+    sklearn \
+    virtualenv `# Creation of virtual environment for python2` \
+    appdirs \
+    h5py \
+    keras \
+    ipython `# Nice python terminal` \
+    ipdb \
+    jupyter `# Nice python web interface` \
+    treep `# MPI-IS code project manager` \
+    sphinx `# Python documentation generator` \
+    gcovr `# Compute the code coverage` \
+    bs4 `# Install the BeautifulSoup (html parsing)` \
+    pybullet `# This the python bindings over the Bullet simulator` \
+    roboball2d `# 2d simulated tennis robot` \
+    doxypypy `# Python file parser that create doxygen friendly output`
+
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
