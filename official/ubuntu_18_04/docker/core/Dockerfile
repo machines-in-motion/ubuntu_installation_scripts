@@ -261,7 +261,11 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     bs4 `# Install the BeautifulSoup (html parsing)` \
     pybullet `# This the python bindings over the Bullet simulator` \
     roboball2d `# 2d simulated tennis robot` \
-    doxypypy `# Python file parser that create doxygen friendly output`
+    doxypypy `# Python file parser that create doxygen friendly output` \
+    sphinx `# build documentation based on ReStructuredText` \
+    m2r `# sphinx module for mardown` \
+    breathe `# sphinx module for doxygen` \
+    sphinx-rtd-theme `# sphinx module for read-the-doc theme`
 
 
 # Auto complete treep

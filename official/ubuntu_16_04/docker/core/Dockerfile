@@ -234,11 +234,11 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade \
     catkin_pkg \
     rospkg \
-    doxypypy `# Python file parser that create doxygen friendly output`
-RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx `# build documentation based on ReStructuredText`
-RUN sudo -H pip3 install --no-cache-dir --upgrade m2r `# sphinx module for mardown`
-RUN sudo -H pip3 install --no-cache-dir --upgrade breathe `# sphinx module for doxygen`
-RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx-rtd-theme `# sphinx module for read-the-doc theme`
+    sphinx            `# build documentation based on ReStructuredText` \
+    m2r               `# sphinx module for mardown` \
+    breathe           `# sphinx module for doxygen` \
+    sphinx-rtd-theme  `# sphinx module for read-the-doc theme` \
+    doxypypy          `# Python file parser that create doxygen friendly output`
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
