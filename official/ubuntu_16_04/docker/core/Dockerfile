@@ -238,6 +238,7 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
 RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx `# build documentation based on ReStructuredText`
 RUN sudo -H pip3 install --no-cache-dir --upgrade m2r `# sphinx module for mardown`
 RUN sudo -H pip3 install --no-cache-dir --upgrade breathe `# sphinx module for doxygen`
+RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx-rtd-theme `# sphinx module for read-the-doc theme`
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
