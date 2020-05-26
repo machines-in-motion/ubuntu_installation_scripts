@@ -236,6 +236,9 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
     rospkg \
     doxypypy `# Python file parser that create doxygen friendly output`
 RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx
+RUN sudo -H pip3 install --no-cache-dir --upgrade m2r
+RUN sudo -H pip3 install --no-cache-dir --upgrade breathe
+RUN sudo -H pip3 install --no-cache-dir --upgrade sphinxcontrib-cmakedomain
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
