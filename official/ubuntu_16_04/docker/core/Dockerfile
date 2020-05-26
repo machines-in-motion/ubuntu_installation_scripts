@@ -235,9 +235,9 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
     catkin_pkg \
     rospkg \
     doxypypy `# Python file parser that create doxygen friendly output`
-RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx
-RUN sudo -H pip3 install --no-cache-dir --upgrade m2r
-RUN sudo -H pip3 install --no-cache-dir --upgrade breathe
+RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx `# build documentation`
+RUN sudo -H pip3 install --no-cache-dir --upgrade m2r `# sphinx module for mardown`
+RUN sudo -H pip3 install --no-cache-dir --upgrade breathe `# sphinx module for doxygen`
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
