@@ -235,8 +235,10 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade \
     catkin_pkg \
     rospkg \
+    sphinx-rtd-theme `# sphinx module for read-the-doc theme` \
+    m2r `# sphinx module for mardown` \
+    sphinx `# build documentation based on ReStructuredText` \
     doxypypy `# Python file parser that create doxygen friendly output`
-RUN sudo -H pip3 install --no-cache-dir --upgrade sphinx
 
 RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     colorama \
@@ -256,7 +258,6 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     ipdb \
     jupyter `# Nice python web interface` \
     treep `# MPI-IS code project manager` \
-    sphinx `# Python documentation generator` \
     gcovr `# Compute the code coverage` \
     bs4 `# Install the BeautifulSoup (html parsing)` \
     pybullet `# This the python bindings over the Bullet simulator` \
