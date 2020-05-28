@@ -236,6 +236,7 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
     rospkg \
     sphinx            `# build documentation based on ReStructuredText` \
     m2r               `# sphinx module for mardown` \
+    recommonmark      `# sphinx module for mardown` \
     breathe           `# sphinx module for doxygen` \
     sphinx-rtd-theme  `# sphinx module for read-the-doc theme` \
     doxypypy          `# Python file parser that create doxygen friendly output`
