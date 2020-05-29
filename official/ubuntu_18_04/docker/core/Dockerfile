@@ -267,7 +267,7 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     m2r               `# sphinx module for mardown` \
     recommonmark      `# sphinx module for mardown` \
     breathe           `# sphinx module for doxygen` \
-    sphinx-rtd-theme  `# sphinx module for read-the-doc theme
+    sphinx-rtd-theme  `# sphinx module for read-the-doc theme`
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
