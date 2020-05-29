@@ -57,6 +57,9 @@ RUN git lfs install --skip-smudge && \
     git config --global credential.helper cache && \
     git config --global credential.helper 'cache --timeout=3600'
 
+# seems that killall does not exists in ubuntu18.04
+RUN apt-get install -y psmisc
+
 # Potentially just os tools, e.g. editor, fancy terminals
 RUN apt-get install -y bash-completion     `# Allow bash completion`\
     	    	       alien               `# File conversions`\
