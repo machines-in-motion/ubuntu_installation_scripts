@@ -58,7 +58,7 @@ RUN echo "" >> /opt/openrobots/setup.bash
 RUN echo "export PATH=\"/opt/openrobots/bin:\$PATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export PKG_CONFIG_PATH=\"/opt/openrobots/lib/pkgconfig:\$PKG_CONFIG_PATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
-RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/plugin:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
+RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/dynamic-graph-plugins:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export PYTHONPATH=\"/opt/openrobots/lib/python2.7/site-packages:\$PYTHONPATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" >> /opt/openrobots/setup.bash
 
