@@ -172,7 +172,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libslicot-dev          `# SNOPT: numerical algorithms from systems and control theory`\
 		    libslicot0             `# SNOPT: numerical algorithms from systems and control theory`\
 		    libncurses5-dev        `# Shell management library`\
-            libzmq3-dev            `# ZeroMQ for communication over network `\
+                    libzmq3-dev            `# ZeroMQ for communication over network `\
 		    python-dev             `# python stuff `\
 		    python-netifaces       `# python stuff `\     
 		    python-pip             `# python stuff `\
@@ -204,6 +204,7 @@ RUN sudo -H pip2 install --no-cache-dir --upgrade pip
 RUN sudo -H pip2 install --no-cache-dir --upgrade pyopenssl
 RUN sudo -H pip2 install --no-cache-dir  --upgrade \
     colorama \
+    mock `# for unit testing` \ 
     matplotlib `# Plotting library` \
     seaborn \
     ndg-httpsclient \
@@ -245,6 +246,7 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
 
 RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     colorama \
+    mock `# for unit testing` \
     matplotlib `# Plotting library` \
     seaborn \
     ndg-httpsclient \
