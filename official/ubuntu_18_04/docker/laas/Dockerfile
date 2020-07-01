@@ -19,6 +19,8 @@ RUN curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-
 # Install the packages
 
 RUN apt-get -y update --fix-missing
+RUN apt-get -y install -f
+RUN apt-get -y upgrade
 
 RUN apt-get install -y robotpkg-dynamic-graph-v3      # The dynamic graph
 RUN apt-get install -y robotpkg-py27-dynamic-graph-v3 # The dynamic graph python bindings
