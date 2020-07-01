@@ -238,11 +238,7 @@ RUN apt-get install -y python3-pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade \
     catkin_pkg \
-    rospkg \
-    sphinx-rtd-theme `# sphinx module for read-the-doc theme` \
-    m2r `# sphinx module for mardown` \
-    sphinx `# build documentation based on ReStructuredText` \
-    doxypypy `# Python file parser that create doxygen friendly output`
+    rospkg
 
 RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     colorama \
@@ -272,6 +268,7 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     m2r `# sphinx module for mardown` \
     recommonmark `# sphinx module for mardown` \
     breathe `# sphinx module for doxygen` \
+    sphinxcontrib-moderncmakedomain `# sphinx module for read-the-doc theme` \
     sphinx-rtd-theme `# sphinx module for read-the-doc theme`
 
 # Auto complete treep
