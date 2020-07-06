@@ -86,7 +86,7 @@ if [ -f ${DIR}/tmp/tmp_install_file ]; then
 fi
 
 # calling the script which generates "automatically_generated_14_04_update" based on dockerfile
-python ${DIR}/docker_to_bash/generate_bash_script_from_dockerfile.py "$ubuntu_version" "$1" "$2"
+python3 ${DIR}/docker_to_bash/generate_bash_script_from_dockerfile.py "$ubuntu_version" "$1" "$2"
 
 # calling the generated install script
 if [ $debug -eq 0 ]; then
