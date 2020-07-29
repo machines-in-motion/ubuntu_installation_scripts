@@ -191,48 +191,6 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 RUN apt-get -y update && apt-get -y upgrade 
 RUN apt-get -y autoremove
 
-###############################################################################
-# PYTHON MODULES
-# new for 16.04:
-# pip first has to be installed with apt-get
-###############################################################################
-
-
-#[BASH UPDATE]
-RUN apt-get install -y python-pip
-RUN sudo -H pip2 install --no-cache-dir --upgrade pip
-RUN sudo -H pip2 install --no-cache-dir --upgrade pyopenssl
-RUN sudo -H pip2 install --no-cache-dir  --upgrade \
-    colorama \
-    mock `# for unit testing` \ 
-    matplotlib `# Plotting library` \
-    seaborn \
-    ndg-httpsclient \
-    numpy `# Linear algebra library` \
-    pyasn1 \
-    schedule \
-    scipy \
-    sklearn \
-    virtualenv `# Creation of virtual environment for python2` \
-    appdirs \
-    h5py \
-    keras \
-    ipython `# Nice python terminal` \
-    ipdb \
-    jupyter `# Nice python web interface` \
-    treep `# MPI-IS code project manager` \
-    sphinx `# Python documentation generator` \
-    gcovr `# Compute the code coverage` \
-    bs4 `# Install the BeautifulSoup (html parsing)` \
-    pybullet `# This the python bindings over the Bullet simulator` \
-    pydot \
-    pyparsing \
-    six \
-    appdirs \
-    protobuf \
-    sphinx \
-    doxypypy `# Python file parser that create doxygen friendly output`
-
 # Basic packages required for running python3 with catkin setup.
 RUN apt-get install -y python3-pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade pip
@@ -273,6 +231,13 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
+
+#############################
+# setting python3 as default 
+#############################
+
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 20
 
 #[/BASH UPDATE]
 
