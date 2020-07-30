@@ -7,11 +7,6 @@ MAINTAINER Vincent Berenz <vincentberenz@tuebingen.mpg.de>
 
 ####################################################
 #             ROS INSTALLATION
-##
-#under ubuntu 16.04 the following changes are made:
-#the following packages don't exist in ros kinetic:
-#-driver-common 
-#-keyboard
 ####################################################
 
 # enable kernel sources
@@ -63,7 +58,10 @@ RUN apt-get install -y \
     ros-melodic-robot-self-filter \
     ros-melodic-xacro \
     ros-melodic-tf2-bullet \
-    ros-melodic-realtime-tools 
+    ros-melodic-realtime-tools
+
+RUN pip install rospkg rosdep
+
 RUN rosdep init
 
 
