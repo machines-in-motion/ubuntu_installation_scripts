@@ -191,6 +191,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 RUN apt-get -y update && apt-get -y upgrade 
 RUN apt-get -y autoremove
 
+
 # Basic packages required for running python3 with catkin setup.
 RUN apt-get install -y python3-pip
 RUN sudo -H pip3 install --no-cache-dir --upgrade pip
@@ -238,6 +239,16 @@ RUN sudo activate-global-python-argcomplete
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 20
+
+##########################
+# installing python2 mock 
+##########################
+
+# for reason I do not understand, for CI on Bamboo mock needs to
+# be also installed for python2
+
+RUN python2.7 -m pip install mock
+
 
 #[/BASH UPDATE]
 
