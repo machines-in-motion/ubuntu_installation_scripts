@@ -25,7 +25,7 @@ RUN apt-get -y upgrade
 #######################
 
 # Gepetto viewer.
-RUN apt-get install -y robotpkg-py35-qt4-gepetto-viewer-corba # LAAS 3D robot viewer network client/server.
+RUN apt-get install -y robotpkg-py36-qt5-gepetto-viewer-corba # LAAS 3D robot viewer network client/server.
 
 # Pinocchio
 RUN apt-get install -y robotpkg-hpp-fcl               # collision detection for pinocchio.
@@ -49,15 +49,15 @@ RUN apt-get install -y robotpkg-sot-dynamic-pinocchio-v3 # DG wrapper around pin
 # A bunch of URDF for the unit-tests
 RUN apt-get install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
 
-RUN apt-get install -y robotpkg-py35-tsid                     # python bindings
-RUN apt-get install -y robotpkg-py35-dynamic-graph-v3         # python bindings
-RUN apt-get install -y robotpkg-py35-eigenpy                  # Python bindings
-RUN apt-get install -y robotpkg-py35-pinocchio                # Python bindings
-RUN apt-get install -y robotpkg-py35-parametric-curves        # Python bindings
-RUN apt-get install -y robotpkg-py35-sot-core-v3              # Python bindings
-RUN apt-get install -y robotpkg-py35-quadprog                 # Python bindings
-# RUN apt-get install -y robotpkg-py35-sot-torque-control     # Python bindings
-RUN apt-get install -y robotpkg-py35-sot-dynamic-pinocchio-v3 # Python bindings
+RUN apt-get install -y robotpkg-py36-tsid                     # python bindings
+RUN apt-get install -y robotpkg-py36-dynamic-graph-v3         # python bindings
+RUN apt-get install -y robotpkg-py36-eigenpy                  # Python bindings
+RUN apt-get install -y robotpkg-py36-pinocchio                # Python bindings
+RUN apt-get install -y robotpkg-py36-parametric-curves        # Python bindings
+RUN apt-get install -y robotpkg-py36-sot-core-v3              # Python bindings
+RUN apt-get install -y robotpkg-py36-quadprog                 # Python bindings
+# RUN apt-get install -y robotpkg-py36-sot-torque-control     # Python bindings
+RUN apt-get install -y robotpkg-py36-sot-dynamic-pinocchio-v3 # Python bindings
 
 # Install the setup.bash for that detup the environment variables
 RUN echo "#! /bin/bash" > /opt/openrobots/setup.bash
