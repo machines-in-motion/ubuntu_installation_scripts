@@ -182,7 +182,8 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    python-empy            `# python stuff `\
 		    python-opencv          `# python stuff `\
 		    libcereal-dev          `# serialization library, used in the shared_memory ` \
-                    libzmq3-dev            `# ZeroMQ for communication over network `
+                    libzmq3-dev            `# ZeroMQ for communication over network ` \
+		    ffmpeg            	   `# Extract videos from pybullet ` \
 #[/BASH UPDATE]
 
 ############################
