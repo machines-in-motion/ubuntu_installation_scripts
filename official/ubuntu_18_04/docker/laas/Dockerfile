@@ -12,8 +12,8 @@ MAINTAINER Vincent Berenz <vincentberenz@tuebingen.mpg.de>
 
 # Add the robotpkg ppa. This contains the LAAS laboratory code base.
 # Typically: pinocchio, dynamic-graph, gepetto-viewer, sot-core, ...
-RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/wip/packages/debian/pub $(lsb_release -sc) robotpkg" > /etc/apt/sources.list.d/ros-latest.list
-RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -sc) robotpkg" >> /etc/apt/sources.list.d/ros-latest.list
+RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/wip/packages/debian/pub $(lsb_release -sc) robotpkg" > /etc/apt/sources.list.d/robotpkg-openrobots.list
+RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(lsb_release -sc) robotpkg" >> /etc/apt/sources.list.d/robotpkg-openrobots.list
 RUN curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-key add -
 
 # Update the apt list.
