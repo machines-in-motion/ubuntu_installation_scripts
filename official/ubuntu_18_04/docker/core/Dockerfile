@@ -168,7 +168,6 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libarmadillo-dev       `# Linear algebra and scientific computing`\
 		    libeigen3-dev          `# Linear Algebra header library`\
 		    libfcl-dev             `# flexible collision library`\
-		    #libslicot-dbg          `# SNOPT: numerical algorithms from systems and control theory`\ -> not available on ubuntu 18.04 ?
 		    libslicot-dev          `# SNOPT: numerical algorithms from systems and control theory`\
 		    libslicot0             `# SNOPT: numerical algorithms from systems and control theory`\
 		    libncurses5-dev        `# Shell management library`\
@@ -182,8 +181,13 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    python-empy            `# python stuff `\
 		    python-opencv          `# python stuff `\
 		    libcereal-dev          `# serialization library, used in the shared_memory ` \
-                    libzmq3-dev            `# ZeroMQ for communication over network ` \
-		    ffmpeg            	   `# Extract videos from pybullet ` \
+                    libzmq3-dev            `# ZeroMQ for communication over network `
+
+
+# docker does not seem to be happy with ffmpeg
+# RUN apt-get install -y ffmpeg `# Extract videos from pybullet ` 
+
+
 #[/BASH UPDATE]
 
 ############################

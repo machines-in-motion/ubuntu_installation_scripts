@@ -21,14 +21,12 @@ CORE = "core" # core code dependencies
 ROS = "ros" # ros packages
 LAAS = "laas" # dynamic graph , pinocchio, etc
 UTILS = "utils" # not code dependencies (e.g. latex, ide, etc)
-ROS2 = "ros2"
 OPTIONS = { "core"     : [CORE],
             "ros"      : [CORE,ROS] ,
-            "ros2"     : [CORE,ROS2],
             "laas"     : [CORE,LAAS],
             "utils"    : [CORE,UTILS],
-            "all-code" : [CORE,ROS,ROS2,LAAS],
-            "all"      : [CORE,ROS,ROS2,LAAS,UTILS] }
+            "all-code" : [CORE,ROS,LAAS],
+            "all"      : [CORE,ROS,LAAS,UTILS] }
 
 MODE_FULL = 1
 MODE_UPDATE_ONLY = 2
@@ -76,11 +74,10 @@ def _get_options():
     error_message = ["pass as argument the desired installation:"]
     error_message.append("\tcore: minimal code dependencies")
     error_message.append("\tros: core + ros and selected ros packages")
-    error_message.append("\tros2: core + ros2 and selected ros packages")
     error_message.append("\tlaas: core + dynamic graph and other laas packages")
     error_message.append("\tutils: tools, e.g. latex or IDEs")
     error_message.append("\tall-code: core + laas + ros")
-    error_message.append("\tall: core + laas + ros + ros2 + utils")
+    error_message.append("\tall: core + laas + ros + utils")
 
     raise _OptionException("\n".join(error_message))
     
@@ -97,7 +94,7 @@ def _execute():
     else :
         update_only=True
 
-    # which set to install ? e.g. core, ros, laas, ...
+    # which set to install ? e.g. core, ros, laas
     options = _get_options()
         
     directory_path = _get_this_script_directory()
