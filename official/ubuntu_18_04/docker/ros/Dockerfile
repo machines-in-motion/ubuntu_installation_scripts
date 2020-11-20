@@ -83,10 +83,11 @@ RUN sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org
 
 # Install ROS 2 packages.
 RUN apt update
-RUN apt install -y ros-eloquent-desktop
+RUN apt install -y ros-eloquent-desktop \
+                   ros-eloquent-ament-cmake-nose
 
 # Install argcomplete
-RUN pip3 install -U argcomplete
-
-# Make sure roskpg is still installed in order to identify package path for config files
-RUN pip3 install rospkg
+RUN pip3 install -U colcon-common-extensions `# colcon super build tool` \
+                    argcomplete `# colcon optional dep, auto completion` \
+                    pytest `# colcon optional dep, python unit tests` \
+                    setuptools `# colcon optional dep, build python package`
