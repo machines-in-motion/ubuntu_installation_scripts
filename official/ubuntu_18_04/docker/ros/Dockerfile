@@ -78,16 +78,54 @@ RUN export LANG=en_US.UTF-8
 # Setup Sources.
 RUN apt update && sudo apt install -y curl gnupg2 lsb-release
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-
 RUN sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
-
-# Install ROS 2 packages.
 RUN apt update
-RUN apt install -y ros-eloquent-desktop \
-                   ros-eloquent-ament-cmake-nose
 
-# Install argcomplete
-RUN pip3 install -U colcon-common-extensions `# colcon super build tool` \
-                    argcomplete `# colcon optional dep, auto completion` \
-                    pytest `# colcon optional dep, python unit tests` \
-                    setuptools `# colcon optional dep, build python package`
+# Install common python packages.
+RUN apt update && sudo apt install -y \
+  python-rosdep \
+  python3-vcstool \
+  wget
+# install some pip packages needed for testing
+RUN python3 -m pip install -U \
+  rosdep \
+  colcon-common-extensions `# colcon super build tool` \
+  argcomplete \
+  flake8 \
+  flake8-blind-except \
+  flake8-builtins \
+  flake8-class-newline \
+  flake8-comprehensions \
+  flake8-deprecated \
+  flake8-docstrings \
+  flake8-import-order \
+  flake8-quotes \
+  pytest-repeat \
+  pytest-rerunfailures \
+  pytest `# colcon optional dep, python unit tests` \
+  pytest-cov \
+  pytest-runner \
+  setuptools `# colcon optional dep, build python package`
+# install Fast-RTPS dependencies
+RUN apt install --no-install-recommends -y \
+  libasio-dev \
+  libtinyxml2-dev
+# install Cyclone DDS dependencies
+RUN apt install --no-install-recommends -y \
+  libcunit1-dev
+
+#
+# Eloquent
+#
+
+# Install ROS-2 eloquent packages.
+RUN apt install -y ros-eloquent-desktop `# All ROS2 base code.` \
+                   ros-eloquent-ament-cmake-nose `# Python unit-tests.` \
+                   ros-eloquent-turtlesim  `# For the DGM tutorial`
+
+#
+# Dashing
+#
+RUN apt install -y ros-dashing-desktop `# All ROS2 base code.` \
+                   ros-dashing-ament-cmake-nose `# Python unit-tests.` \
+                   ros-dashing-turtlesim  `# For the DGM tutorial`
