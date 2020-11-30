@@ -115,15 +115,6 @@ RUN apt install --no-install-recommends -y \
   libcunit1-dev
 
 #
-# Eloquent
-#
-
-# Install ROS-2 eloquent packages.
-RUN apt install -y ros-eloquent-desktop `# All ROS2 base code.` \
-                   ros-eloquent-ament-cmake-nose `# Python unit-tests.` \
-                   ros-eloquent-turtlesim  `# For the DGM tutorial`
-
-#
 # Dashing
 #
 RUN apt install -y ros-dashing-desktop `# All ROS2 base code.` \
