@@ -184,7 +184,9 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
                     libzmq3-dev            `# ZeroMQ for communication over network ` \
                     xterm                  `# Spawning terminal with gdb via ros2 launch` \
 		    ffmpeg            	   `# Extract videos from pybullet ` \
-
+                    libgtest-dev \
+		    libboost-dev \
+		    libboost-thread-dev \
 # docker does not seem to be happy with ffmpeg
 # RUN apt-get install -y ffmpeg `# Extract videos from pybullet ` 
 
