@@ -186,7 +186,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    ffmpeg            	   `# Extract videos from pybullet ` \
                     libgtest-dev \
 		    libboost-dev \
-		    libboost-thread-dev \
+		    libboost-thread-dev 
 # docker does not seem to be happy with ffmpeg
 # RUN apt-get install -y ffmpeg `# Extract videos from pybullet ` 
 
