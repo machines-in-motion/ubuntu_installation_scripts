@@ -68,5 +68,6 @@ RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib:\$LD_LIBRARY_PATH\"" >> /
 RUN echo "export LD_LIBRARY_PATH=\"/opt/openrobots/lib/dynamic-graph-plugins:\$LD_LIBRARY_PATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export PYTHONPATH=\"/opt/openrobots/lib/python3.6/site-packages:\$PYTHONPATH\"" >> /opt/openrobots/setup.bash
 RUN echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" >> /opt/openrobots/setup.bash
+RUN echo "export CMAKE_PREFIX_PATH=\"/opt/openrobots:\$CMAKE_PREFIX_PATH\"" >> /opt/openrobots/setup.bash
 
 RUN chown -R root:root /opt/openrobots
