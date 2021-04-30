@@ -71,3 +71,5 @@ RUN echo "export ROS_PACKAGE_PATH=\"/opt/openrobots/share:\$ROS_PACKAGE_PATH\"" 
 RUN echo "export CMAKE_PREFIX_PATH=\"/opt/openrobots:\$CMAKE_PREFIX_PATH\"" >> /opt/openrobots/setup.bash
 
 RUN chown -R root:root /opt/openrobots
+
+#[/BASH UPDATE]

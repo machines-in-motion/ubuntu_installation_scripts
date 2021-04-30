@@ -191,7 +191,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 # RUN apt-get install -y ffmpeg `# Extract videos from pybullet ` 
 
 
-#[/BASH UPDATE]
+#[BASH UPDATE]
 
 ############################
 # remove unrequired packages
