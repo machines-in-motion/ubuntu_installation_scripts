@@ -49,10 +49,10 @@ cp $DEFAULT_CONFIG .config
 
 echo "Please apply the following configurations in the next step:"
 echo ""
-echo "General setup"
+echo "General setup [Enter]"
 echo "  Local version - append to kernel release: [Enter] Add '-preempt-rt'"
 echo ""
-echo "Processor type and features ---> [Enter]"
+echo "General setup [Enter]"
 echo "  Preemption Model (Voluntary Kernel Preemption (Desktop)) [Enter]"
 echo "    Fully Preemptible Kernel (RT) [Enter] #Select"
 echo ""
