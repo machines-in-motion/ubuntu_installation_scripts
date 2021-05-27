@@ -5,11 +5,11 @@ set -e
 
 # User input, you potentially need to update or change this values during your installation
 VERSION_MAJOR=5
-VERSION_SECOND=6
-VERSION_MINOR=19
+VERSION_SECOND=10
+VERSION_MINOR=35
 VERSION=$VERSION_MAJOR.$VERSION_SECOND.$VERSION_MINOR
-VERSION_PATCH=$VERSION-rt11
-DEFAULT_CONFIG=/boot/config-5.3.0-28-generic
+VERSION_PATCH=$VERSION-rt39
+DEFAULT_CONFIG=/boot/config-5.4.0-73-generic
 
 if [  ! -f  $DEFAULT_CONFIG ]; then
    echo "Configure file $FILE does not exist. Please use other file."
@@ -43,6 +43,7 @@ xzcat ../patch-$VERSION_PATCH.patch.xz | patch -p1
 
 # Create necessary file, see: https://ubuntuforums.org/showthread.php?t=2373905
 touch REPORTING-BUGS
+touch /usr/share/kernel-package/ChangeLog
 
 # Copy default config and prompt for configuration screen.
 cp $DEFAULT_CONFIG .config
@@ -61,6 +62,9 @@ read -p "Please read the above instructions" yn
 
 make menuconfig -j
 
+# Disable the SYSTEM_TRUSTED_KEYS from the config.
+# SEE: https://askubuntu.com/a/1329625
+scripts/config --disable SYSTEM_TRUSTED_KEYS
 
 # Build the kernel.
 NUMBER_CPUS=`grep -c ^processor /proc/cpuinfo`
