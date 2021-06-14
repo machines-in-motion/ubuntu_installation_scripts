@@ -43,7 +43,7 @@ xzcat ../patch-$VERSION_PATCH.patch.xz | patch -p1
 
 # Create necessary file, see: https://ubuntuforums.org/showthread.php?t=2373905
 touch REPORTING-BUGS
-touch /usr/share/kernel-package/ChangeLog
+sudo touch /usr/share/kernel-package/ChangeLog
 
 # Copy default config and prompt for configuration screen.
 cp $DEFAULT_CONFIG .config
