@@ -7,7 +7,7 @@ MAINTAINER Vincent Berenz <vincentberenz@tuebingen.mpg.de>
 ENV DEBIAN_FRONTEND=noninteractive
 
 ###################################################################################
-# This Dockerfile is also used to generate the official image install ssh 
+# This Dockerfile is also used to generate the official image install ssh
 # script. (see desktop_update folder in amd-clmc/official_images)
 # The [BASH IGNORE*]  [/BASH IGNORE*] ; [SSH ONLY*] [/SSH ONLY*] tags are here to indicate
 # what will go in the official ssh install script and what will not
@@ -39,7 +39,7 @@ RUN apt-get install -y sudo              # Provide the sudo rights, required for
 RUN wget -O enable_kernel_sources.sh http://bit.ly/en_krnl_src
 RUN bash ./enable_kernel_sources.sh
 RUN apt-get update && apt-get install -y software-properties-common
- 
+
 
 
 ####################################################
@@ -125,7 +125,7 @@ RUN apt-get install -y libdbus-1-dev         `# SL: shared memory.`\
 		       libccd-dev            `# SL?: collision detection library`\
 		       libevent-dev          `# SL?: Asynchronous event notification library `\
 		       libglew-dev           `# SL?: OpenGL Extension Wrangler`\
-		       libssl-dev            `# SL?: Secure Sockets Layer toolkit`\  
+		       libssl-dev            `# SL?: Secure Sockets Layer toolkit`\
 		       libstartup-notification0-dev     `# SL?: library for program launch feedback `\
 		       #libwxgtk3.0-0v5              `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |-> not available on 18.04 ?
 		       #libwxgtk3.0-0v5-dbg          `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |
@@ -152,7 +152,7 @@ RUN apt-get install -y libdbus-1-dev         `# SL: shared memory.`\
 		       ntpdate                      `# Network Time Protocol daemon and utility programs  `\
 		       libace-dev                   `# C++ network programming framework - development files`
 
-# Code dependencies 
+# Code dependencies
 RUN apt-get install -y autoconf               `# Used to build SNOPT from source`\
 		    cmake                  `# C++, Python Project builder`\
 		    lsb-release            `# Linux Standard Base version reporting utility `\
@@ -173,9 +173,9 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libncurses5-dev        `# Shell management library`\
             libzmq3-dev            `# ZeroMQ for communication over network `\
 		    python-dev             `# python stuff `\
-		    python-netifaces       `# python stuff `\     
+		    python-netifaces       `# python stuff `\
 		    python-pip             `# python stuff `\
-		    python-vcstools        `# python stuff `\   
+		    python-vcstools        `# python stuff `\
 		    python-wstool          `# python stuff `\
 		    python-qt4             `# python stuff `\
 		    python-empy            `# python stuff `\
@@ -186,9 +186,9 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    ffmpeg            	   `# Extract videos from pybullet ` \
                     libgtest-dev \
 		    libboost-dev \
-		    libboost-thread-dev 
+		    libboost-thread-dev
 # docker does not seem to be happy with ffmpeg
-# RUN apt-get install -y ffmpeg `# Extract videos from pybullet ` 
+# RUN apt-get install -y ffmpeg `# Extract videos from pybullet `
 
 
 #[BASH UPDATE]
@@ -196,7 +196,7 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 ############################
 # remove unrequired packages
 ############################
-RUN apt-get -y update && apt-get -y upgrade 
+RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get -y autoremove
 
 
@@ -237,20 +237,21 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     recommonmark `# sphinx module for mardown` \
     breathe `# sphinx module for doxygen` \
     sphinxcontrib-moderncmakedomain `# sphinx module for read-the-doc theme` \
-    sphinx-rtd-theme `# sphinx module for read-the-doc theme`
+    sphinx-rtd-theme `# sphinx module for read-the-doc theme` \
+    inputs `# for reading gamepad and midi keyboards`
 
 # Auto complete treep
 RUN sudo activate-global-python-argcomplete
 
 #############################
-# setting python3 as default 
+# setting python3 as default
 #############################
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 20
 
 ##########################
-# installing python2 mock 
+# installing python2 mock
 ##########################
 
 # for reason I do not understand, for CI on Bamboo mock needs to
@@ -262,7 +263,7 @@ RUN python2.7 -m pip install mock
 #[/BASH UPDATE]
 
 ###############################################################################
-# required for the use of snopt 
+# required for the use of snopt
 ###############################################################################
 #[BASH UPDATE]
 RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz -P /tmp/ && \
@@ -279,7 +280,7 @@ RUN wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz -P /tmp/ && \
 # Final upgrade
 ###############
 #[BASH UPDATE]
-RUN apt-get -y update && apt-get -y upgrade  
+RUN apt-get -y update && apt-get -y upgrade
 #[/BASH UPDATE]
 
 ########################
