@@ -4,6 +4,7 @@ import docker_to_bash
 UBUNTU_14_04 = "14_04"
 UBUNTU_16_04 = "16_04"
 UBUNTU_18_04 = "18_04"
+UBUNTU_20_04 = "20_04"
 
 # there are several dockerfiles which can be used
 # to generates a bash script, all in ubuntu_xx_x/dockerfile
@@ -40,6 +41,8 @@ def _get_ubuntu_version():
         return UBUNTU_16_04
     if "18.04" in sys.argv:
         return UBUNTU_18_04
+    if "20.04" in sys.argv:
+        return UBUNTU_20_04
     raise Exception("14.04 or 16.04 or 18.04 should be passed as argument")
 
 
