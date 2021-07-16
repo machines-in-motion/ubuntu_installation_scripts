@@ -9,7 +9,7 @@ VERSION_SECOND=10
 VERSION_MINOR=35
 VERSION=$VERSION_MAJOR.$VERSION_SECOND.$VERSION_MINOR
 VERSION_PATCH=$VERSION-rt39
-DEFAULT_CONFIG=/boot/config-5.4.0-73-generic
+DEFAULT_CONFIG=/boot/config-$(uname -r)
 
 if [  ! -f  $DEFAULT_CONFIG ]; then
    echo "Configure file $FILE does not exist. Please use other file."
