@@ -98,7 +98,7 @@ sudo usermod -a -G realtime $USER
 # Change the permission on /dev/cpu_dma_latency. This allows other users to
 # set the minimum desired latency for the CPU other than root (e.g. the current
 # user from dynamic graph manager).
-sudo chmod 0777 /dev/cpu_dma_latency
+sudo chmod 0666 /dev/cpu_dma_latency
 
 echo "========================================================================="
 echo "==="
