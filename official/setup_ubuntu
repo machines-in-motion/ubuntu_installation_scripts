@@ -12,14 +12,8 @@ ubuntu_version="$(lsb_release -rs)"
 
 echo "ubuntu version: $ubuntu_version"
 
-# we support only 14.04 and 16.04
+# we support only 18.04 and 20.04
 valid_ubuntu=0
-if [ "$ubuntu_version" = "14.04" ]; then
-    valid_ubuntu=1
-fi
-if [ "$ubuntu_version" = "16.04" ]; then
-    valid_ubuntu=1
-fi
 if [ "$ubuntu_version" = "18.04" ]; then
     valid_ubuntu=1
 fi
@@ -105,7 +99,7 @@ else
     cat ${DIR}/tmp/tmp_install_file
     echo ""
 fi
-    
+
 
 
 

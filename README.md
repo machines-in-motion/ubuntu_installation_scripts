@@ -4,8 +4,6 @@ The repositories contains convenience installation scripts for ubuntu.
 
 The most useful script is official/setup_ubuntu . This script is meant to be called after a fresh installation of ubuntu, and, depending on the argument passed, installs all typical dependencies required for programming robots. These include ROS, dynamic graph and related [robotpkg](http://robotpkg.openrobots.org/) software (e.g stack of task and pinocchio). Call the script without arguments to see the installation options.
 
-**Only Ubuntu16.04 and Ubuntu18.04 are fully supported**. *Ubuntu16.04 support is going to be dropped soon*. The script will also work on 14.04, but this is deprecated and will mostly install ROS and dependencies related to SL will be installed.
-
 Usage:
 
 ```bash
