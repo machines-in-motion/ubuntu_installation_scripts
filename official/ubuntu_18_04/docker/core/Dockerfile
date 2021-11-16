@@ -208,7 +208,7 @@ RUN sudo -H pip3 install --no-cache-dir --upgrade \
     rospkg
 
 RUN sudo -H pip3 install --no-cache-dir  --upgrade \
-    empy `Used by ROS in order to generate messages` \
+    empy `# Used by ROS in order to generate messages` \
     colorama \
     mock `# for unit testing` \
     matplotlib `# Plotting library` \
