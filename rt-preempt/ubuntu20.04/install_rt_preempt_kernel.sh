@@ -23,7 +23,7 @@ echo "==="
 echo "========================================================================="
 
 # Install dependencies to build kernel.
-sudo apt-get install -y libelf-dev libncurses5-dev libssl-dev kernel-package flex bison
+sudo apt-get install -y libelf-dev libncurses5-dev libssl-dev kernel-package flex bison dwarves zstd
 
 # Install packages to test rt-preempt.
 sudo apt install rt-tests
@@ -65,6 +65,7 @@ make menuconfig -j
 # Disable the SYSTEM_TRUSTED_KEYS from the config.
 # SEE: https://askubuntu.com/a/1329625
 scripts/config --disable SYSTEM_TRUSTED_KEYS
+scripts/config --disable SYSTEM_REVOCATION_KEYS
 
 # Build the kernel.
 NUMBER_CPUS=`grep -c ^processor /proc/cpuinfo`
