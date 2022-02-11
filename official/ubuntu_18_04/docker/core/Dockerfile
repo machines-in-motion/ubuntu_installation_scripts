@@ -233,6 +233,7 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     roboball2d `# 2d simulated tennis robot` \
     doxypypy `# Python file parser that create doxygen friendly output` \
     sphinx `# build documentation based on ReStructuredText` \
+    mistune < 2.0.0 `# temporary solutions to the problem of m2r` \
     m2r `# sphinx module for mardown` \
     recommonmark `# sphinx module for mardown` \
     breathe `# sphinx module for doxygen` \
