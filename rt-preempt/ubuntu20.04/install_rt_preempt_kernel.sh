@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# Exit on the first error.
-set -e
-
 # User input, you potentially need to update or change this values during your installation
 VERSION_MAJOR=5
-VERSION_SECOND=10
-VERSION_MINOR=56
+VERSION_SECOND=14
+VERSION_MINOR=2
 VERSION=$VERSION_MAJOR.$VERSION_SECOND.$VERSION_MINOR
-VERSION_PATCH=$VERSION-rt48
+VERSION_PATCH=$VERSION-rt21
 DEFAULT_CONFIG=/boot/config-$(uname -r)
 
 if [  ! -f  $DEFAULT_CONFIG ]; then
@@ -68,12 +65,12 @@ scripts/config --disable SYSTEM_TRUSTED_KEYS
 scripts/config --disable SYSTEM_REVOCATION_KEYS
 
 # Build the kernel.
-NUMBER_CPUS=`grep -c ^processor /proc/cpuinfo`
-CONCURRENCY_LEVEL=$NUMBER_CPUS make-kpkg --rootcmd fakeroot --initrd kernel_image kernel_headers
+make -j$(nproc) deb-pkg
 
-# Install the build kernel.
-sudo dpkg -i ../linux-headers-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb ../linux-image-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-10.00.Custom_amd64.deb
-
+# Install the built kernel.
+sudo dpkg -i ../linux-headers-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-1_amd64.deb 
+sudo dpkg -i ../linux-image-$VERSION_PATCH-preempt-rt_$VERSION_PATCH-preempt-rt-1_amd64.deb
+sudo dpkg -i ../linux-libc-dev_$VERSION_PATCH-preempt-rt-1_amd64.deb
 
 # Modify the grub setting: comment out GRUB_HIDDEN_TIMEOUT and update grub.
 sudo sed -i 's/GRUB_HIDDEN_TIMEOUT/# GRUB_HIDDEN_TIMEOUT/g' /etc/default/grub
