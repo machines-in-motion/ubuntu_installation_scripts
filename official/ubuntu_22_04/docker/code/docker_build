@@ -1,0 +1,16 @@
+#! /bin/bash
+
+rm -f tmp
+touch tmp
+
+# laas is from ros which is from core
+echo "FROM docker.is.localnet:5000/amd/18.04:laas" >> tmp
+
+# adding dependencies for robotic challenge
+cat ../challenge/Dockerfile | grep -v FROM >> tmp
+
+mv tmp Dockerfile
+
+docker build -t docker.is.localnet:5000/amd/18.04:code .
+
+rm Dockerfile

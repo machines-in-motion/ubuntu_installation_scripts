@@ -20,6 +20,9 @@ fi
 if [ "$ubuntu_version" = "20.04" ]; then
     valid_ubuntu=1
 fi
+if [ "$ubuntu_version" = "22.04" ]; then
+    valid_ubuntu=1
+fi
 if [ $valid_ubuntu -eq 0 ]; then
     echo "This script supports exclusively ubuntu 14.04 and 16.04"
     exit
