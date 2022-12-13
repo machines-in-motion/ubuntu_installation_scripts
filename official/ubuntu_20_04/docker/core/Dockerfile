@@ -1,6 +1,6 @@
 # [BASH IGNORE]
 
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 MAINTAINER Vincent Berenz <vincentberenz@tuebingen.mpg.de>
 
 # making sure no prompt during installation
@@ -62,7 +62,7 @@ RUN apt-get install -y psmisc
 
 # Potentially just os tools, e.g. editor, fancy terminals
 RUN apt-get install -y bash-completion     `# Allow bash completion`\
-    	    	       alien               `# File conversions`\
+    	    	       #alien               `# File conversions`\
 		       terminator          `# Fancy terminal`\
 		       apt-file            `# Is a software package that indexes`\
                                            `# the contents of packages in your`\
@@ -75,7 +75,7 @@ RUN apt-get install -y bash-completion     `# Allow bash completion`\
 		       f2c                 `# Fortran to C/C++ translator`\
 		       libf2c2-dev         `# To be used with f2c (fortran 2 c/c++)`\
 		       man                 `# on-line manual pager`\
-		       libcairo2-dev       `# 2D Graphics package`\
+		       #libcairo2-dev       `# 2D Graphics package`\
 		       patch               `# Apply a diff file to an original`\
 		       picocom             `# minimal dumb-terminal emulation program`\
 		       rpm                 `#  Tools to create and apply deltarpms`\
@@ -101,56 +101,56 @@ RUN apt-get install -y less                `# Similar to "more", installed by de
 # Code dependencies ?
 RUN apt-get install -y asciidoc                 `# "Highly configurable text format for writing documentation"`\
     	    	       libffi-dev               `# Code binder developped by Haskell`\
-		       libgirepository1.0-dev   `# Inspect GObject.`\
-		       libpango1.0-dev          `# Police rendering`\
+		       #libgirepository1.0-dev   `# Inspect GObject.`\
+		       #libpango1.0-dev          `# Police rendering`\
 		       m4                       `# a macro processing language`\
 		       mesa-utils               `# Miscellaneous Mesa GL utilities`
 
-# Apollo
-RUN apt-get install -y libgoogle-glog-dev    `# library that implements application-level logging`\
-    	    	       libhdf5-dev           `# Hierarchical Data Format 5`\
-		       libgflags-dev         `# commandline flags module for C++ (headers)`\
-		       libgflags2.2          `# commandline flags module for C++ (lib)`\
-		       liblua5.1-0-dev       `# Development files for the Lua language`\
-		       luarocks              `# Development files for the Lua language`\
-		       libxdg-basedir-dev    `# Implementation of the XDG Base Directory Specifications `\
-		       protobuf-compiler     `# messages formatting package`\
-		       protobuf-c-compiler   `# messages formatting package`
-		       #libeinspline-dev      `# library for interpolating cubic basis splines` -> not available on 18.04 ?
+# # Apollo
+# RUN apt-get install -y libgoogle-glog-dev    `# library that implements application-level logging`\
+#     	    	       libhdf5-dev           `# Hierarchical Data Format 5`\
+# 		       libgflags-dev         `# commandline flags module for C++ (headers)`\
+# 		       libgflags2.2          `# commandline flags module for C++ (lib)`\
+# 		       liblua5.1-0-dev       `# Development files for the Lua language`\
+# 		       luarocks              `# Development files for the Lua language`\
+# 		       libxdg-basedir-dev    `# Implementation of the XDG Base Directory Specifications `\
+# 		       protobuf-compiler     `# messages formatting package`\
+# 		       protobuf-c-compiler   `# messages formatting package`
+# 		       #libeinspline-dev      `# library for interpolating cubic basis splines` -> not available on 18.04 ?
 
-# SL code dependencies
-RUN apt-get install -y libdbus-1-dev         `# SL: shared memory.`\
-    	    	       libc6-dev             `# SL: Linux develpment header files (SL/Xenomai dependencies?)`\
-		       libedit-dev           `# SL?: Library to edit file (most probably the .cf files) `\
-		       libccd-dev            `# SL?: collision detection library`\
-		       libevent-dev          `# SL?: Asynchronous event notification library `\
-		       libglew-dev           `# SL?: OpenGL Extension Wrangler`\
-		       libssl-dev            `# SL?: Secure Sockets Layer toolkit`\  
-		       libstartup-notification0-dev     `# SL?: library for program launch feedback `\
-		       #libwxgtk3.0-0v5              `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |-> not available on 18.04 ?
-		       #libwxgtk3.0-0v5-dbg          `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |
-		       libwxgtk3.0-dev              `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit  `\
-		       libx11-xcb-dev               `# SL?: simulator? Xlib/XCB interface library`\
-		       libxcb-cursor-dev            `# SL?: simulator? X library `\
-		       libxcb-icccm4-dev            `# SL?: simulator? X library`\
-		       libxcb-keysyms1-dev          `# SL?: simulator? X library`\
-		       libxcb-randr0-dev            `# SL?: simulator? X library`\
-		       libxcb-render-util0-dev      `# SL?: simulator? X library`\
-		       libxcb-shape0-dev            `# SL?: simulator? X library`\
-		       libxcb-util0-dev             `# SL?: simulator? X library `\
-		       libxcb-xinerama0-dev         `# SL?: simulator? X library`\
-		       libxcb-xkb-dev               `# SL?: simulator? X library`\
-		       libxcb-xtest0-dev            `# SL?: simulator? X library`\
-		       libxcb1-dev                  `# SL?: simulator? X library`\
-		       libxinerama-dev              `# SL?: simulator? X library`\
-		       libxkbcommon-dev             `# SL?: simulator? X library`\
-		       libxkbcommon-x11-dev         `# SL?: simulator? X library`\
-		       libxmu-dev                   `# SL?: simulator? X library`\
-		       xutils-dev                   `# SL?: X window utils`\
-		       net-tools                    `# SL: The NET-3 networking toolkit`\
-		       ntp                          `# Network Time Protocol daemon and utility programs  `\
-		       ntpdate                      `# Network Time Protocol daemon and utility programs  `\
-		       libace-dev                   `# C++ network programming framework - development files`
+# # SL code dependencies
+# RUN apt-get install -y libdbus-1-dev         `# SL: shared memory.`\
+#     	    	       libc6-dev             `# SL: Linux develpment header files (SL/Xenomai dependencies?)`\
+# 		       libedit-dev           `# SL?: Library to edit file (most probably the .cf files) `\
+# 		       libccd-dev            `# SL?: collision detection library`\
+# 		       libevent-dev          `# SL?: Asynchronous event notification library `\
+# 		       libglew-dev           `# SL?: OpenGL Extension Wrangler`\
+# 		       libssl-dev            `# SL?: Secure Sockets Layer toolkit`\  
+# 		       libstartup-notification0-dev     `# SL?: library for program launch feedback `\
+# 		       #libwxgtk3.0-0v5              `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |-> not available on 18.04 ?
+# 		       #libwxgtk3.0-0v5-dbg          `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit `\ |
+# 		       libwxgtk3.0-dev              `# SL?: simulator? wxWidgets Cross-platform C++ GUI toolkit  `\
+# 		       libx11-xcb-dev               `# SL?: simulator? Xlib/XCB interface library`\
+# 		       libxcb-cursor-dev            `# SL?: simulator? X library `\
+# 		       libxcb-icccm4-dev            `# SL?: simulator? X library`\
+# 		       libxcb-keysyms1-dev          `# SL?: simulator? X library`\
+# 		       libxcb-randr0-dev            `# SL?: simulator? X library`\
+# 		       libxcb-render-util0-dev      `# SL?: simulator? X library`\
+# 		       libxcb-shape0-dev            `# SL?: simulator? X library`\
+# 		       libxcb-util0-dev             `# SL?: simulator? X library `\
+# 		       libxcb-xinerama0-dev         `# SL?: simulator? X library`\
+# 		       libxcb-xkb-dev               `# SL?: simulator? X library`\
+# 		       libxcb-xtest0-dev            `# SL?: simulator? X library`\
+# 		       libxcb1-dev                  `# SL?: simulator? X library`\
+# 		       libxinerama-dev              `# SL?: simulator? X library`\
+# 		       libxkbcommon-dev             `# SL?: simulator? X library`\
+# 		       libxkbcommon-x11-dev         `# SL?: simulator? X library`\
+# 		       libxmu-dev                   `# SL?: simulator? X library`\
+# 		       xutils-dev                   `# SL?: X window utils`\
+# 		       net-tools                    `# SL: The NET-3 networking toolkit`\
+# 		       ntp                          `# Network Time Protocol daemon and utility programs  `\
+# 		       ntpdate                      `# Network Time Protocol daemon and utility programs  `\
+# 		       libace-dev                   `# C++ network programming framework - development files`
 
 # Code dependencies 
 RUN apt-get install -y autoconf               `# Used to build SNOPT from source`\
@@ -172,14 +172,14 @@ RUN apt-get install -y autoconf               `# Used to build SNOPT from source
 		    libslicot0             `# SNOPT: numerical algorithms from systems and control theory`\
 		    libncurses5-dev        `# Shell management library`\
             libzmq3-dev            `# ZeroMQ for communication over network `\
-		    python-dev             `# python stuff `\
-		    python-netifaces       `# python stuff `\     
-		    python-pip             `# python stuff `\
-		    python-vcstools        `# python stuff `\   
-		    python-wstool          `# python stuff `\
-		    python-qt4             `# python stuff `\
-		    python-empy            `# python stuff `\
-		    python-opencv          `# python stuff `\
+		    #python-dev             `# python stuff `\
+		    #python-netifaces       `# python stuff `\     
+		    #python-pip             `# python stuff `\
+		    #python-vcstools        `# python stuff `\   
+		    #python-wstool          `# python stuff `\
+		    #python-qt4             `# python stuff `\
+		    #python-empy            `# python stuff `\
+		    #python-opencv          `# python stuff `\
 		    libcereal-dev          `# serialization library, used in the shared_memory ` \
                     libzmq3-dev            `# ZeroMQ for communication over network ` \
                     xterm                  `# Spawning terminal with gdb via ros2 launch` \
@@ -230,7 +230,7 @@ RUN sudo -H pip3 install --no-cache-dir  --upgrade \
     gcovr `# Compute the code coverage` \
     bs4 `# Install the BeautifulSoup (html parsing)` \
     pybullet `# This the python bindings over the Bullet simulator` \
-    roboball2d `# 2d simulated tennis robot` \
+    #roboball2d `# 2d simulated tennis robot` \
     doxypypy `# Python file parser that create doxygen friendly output` \
     sphinx `# build documentation based on ReStructuredText` \
     m2r `# sphinx module for mardown` \

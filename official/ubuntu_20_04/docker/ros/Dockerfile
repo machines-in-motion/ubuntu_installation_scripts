@@ -27,11 +27,11 @@ RUN apt-get -y update && \
 
 # Install the ros packages
 RUN apt-get install -y \
-    python-catkin-tools \
-    python-rosdep \
-    python-rosinstall \
-    python-rospkg \
-    python-wstool \
+    #python-catkin-tools \
+    #python-rosdep \
+    #python-rosinstall \
+    #python-rospkg \
+    #python-wstool \
     ros-noetic-audio-common \
     ros-noetic-catkin \
     ros-noetic-cmake-modules \
@@ -83,7 +83,7 @@ RUN apt update
 
 # Install common python packages.
 RUN apt update && sudo apt install -y \
-  python-rosdep \
+  #python-rosdep \
   python3-vcstool \
   wget
 # install some pip packages needed for testing
@@ -116,7 +116,7 @@ RUN apt install --no-install-recommends -y \
   libcunit1-dev
 
 #
-# Dashing
+# Foxy
 #
 RUN apt install -y ros-foxy-desktop `# All ROS2 base code.` \
                    ros-foxy-ament-cmake-nose `# Python unit-tests.` \
