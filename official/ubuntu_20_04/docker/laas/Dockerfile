@@ -17,17 +17,30 @@ RUN echo "deb [arch=amd64] http://robotpkg.openrobots.org/packages/debian/pub $(
 RUN curl http://robotpkg.openrobots.org/packages/debian/robotpkg.key | sudo apt-key add -
 
 # Update the apt list.
-RUN apt -y update
+RUN apt-get -y update --fix-missing
+RUN apt-get -y install -f
+RUN apt-get -y upgrade
 
 # Install the packages.
 #######################
 
 # Pinocchio
-RUN apt install -y robotpkg-py38-pinocchio
-RUN apt install -y robotpkg-py38-crocoddyl
+RUN apt-get install -y robotpkg-hpp-fcl               # collision detection for pinocchio.
+RUN apt-get install -y robotpkg-libccd                # not sure.
+RUN apt-get install -y robotpkg-octomap               # not sure.
+RUN apt-get install -y robotpkg-pinocchio             # Eigen based rigid body dynamics library.
+
+RUN apt-get install -y robotpkg-eigen-quadprog              # QP solver using eigen.
+
 
 # A bunch of URDF for the unit-tests
-RUN apt install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
+RUN apt-get install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
+
+RUN apt-get install -y robotpkg-py38-eigenpy                  # Python bindings
+RUN apt-get install -y robotpkg-py38-pinocchio                # Python bindings
+RUN apt-get install -y robotpkg-py38-quadprog                 # Python bindings
+RUN apt-get install -y robotpkg-py38-crocoddyl                # Python bindings
+RUN apt-get install -y robotpkg-py38-hpp-fcl                  # Python bindings
 
 # Install the setup.bash for that detup the environment variables
 RUN echo "#! /bin/bash" > /opt/openrobots/setup.bash
