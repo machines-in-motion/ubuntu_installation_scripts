@@ -30,8 +30,9 @@ RUN apt-get install -y robotpkg-libccd                # not sure.
 RUN apt-get install -y robotpkg-octomap               # not sure.
 RUN apt-get install -y robotpkg-pinocchio             # Eigen based rigid body dynamics library.
 
+# Warning: for some reason TSID must be installed for eiquadprog to be found by cmake
 RUN apt-get install -y robotpkg-eigen-quadprog              # QP solver using eigen.
-
+RUN apt-get install -y robotpkg-tsid                        # Task Space Inverse Dynamics.
 
 # A bunch of URDF for the unit-tests
 RUN apt-get install -y robotpkg-example-robot-data      # Data for LAAS unnitests.
@@ -41,6 +42,7 @@ RUN apt-get install -y robotpkg-py38-pinocchio                # Python bindings
 RUN apt-get install -y robotpkg-py38-quadprog                 # Python bindings
 RUN apt-get install -y robotpkg-py38-crocoddyl                # Python bindings
 RUN apt-get install -y robotpkg-py38-hpp-fcl                  # Python bindings
+RUN apt-get install -y robotpkg-py38-tsid                     # Python bindings
 
 # Install the setup.bash for that detup the environment variables
 RUN echo "#! /bin/bash" > /opt/openrobots/setup.bash
