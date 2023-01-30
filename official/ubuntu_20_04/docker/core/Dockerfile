@@ -106,6 +106,9 @@ RUN apt-get install -y asciidoc                 `# "Highly configurable text for
 		       m4                       `# a macro processing language`\
 		       mesa-utils               `# Miscellaneous Mesa GL utilities`
 
+# required for real-time tools
+RUN apt-get install -y libedit-dev
+
 # # Apollo
 # RUN apt-get install -y libgoogle-glog-dev    `# library that implements application-level logging`\
 #     	    	       libhdf5-dev           `# Hierarchical Data Format 5`\
